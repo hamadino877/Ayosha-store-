@@ -1,22 +1,27 @@
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ayosha Store | عالم الأناقة</title>
+<title>Ayosha Store | عالم الأناقة والجمال</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<!-- FontAwesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <style>
   :root {
     --gold: #c9a96e;
     --gold-light: #e8d5b0;
     --rose: #d4637a;
-    --blush: #f5e6ea;
+    --rose-light: #f5e6ea;
     --dark: #1a1218;
     --charcoal: #2d2230;
     --cream: #fdf8f5;
     --text: #3a2d35;
     --muted: #8a7580;
+    --success: #25D366;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,6 +33,39 @@
     background: var(--cream);
     color: var(--text);
     overflow-x: hidden;
+  }
+
+  /* CUSTOM NOTIFICATION (TOAST) */
+  #toast-container {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+  }
+
+  .toast {
+    background: var(--dark);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border-right: 4px solid var(--gold);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    transform: translateX(-120%);
+    transition: transform 0.3s ease;
+    pointer-events: auto;
+  }
+
+  .toast.show {
+    transform: translateX(0);
   }
 
   /* HEADER */
@@ -42,11 +80,11 @@
   .header-top {
     background: var(--gold);
     text-align: center;
-    padding: 6px;
+    padding: 8px;
     font-size: 13px;
     color: var(--dark);
-    font-weight: 600;
-    letter-spacing: 1px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
   }
 
   nav {
@@ -60,17 +98,18 @@
 
   .logo {
     font-family: 'Playfair Display', serif;
-    font-size: 28px;
+    font-size: 30px;
     color: var(--gold);
     font-weight: 900;
     letter-spacing: 2px;
     text-shadow: 0 0 20px rgba(201,169,110,0.4);
+    cursor: pointer;
   }
 
   .logo span {
     color: #fff;
     font-weight: 400;
-    font-size: 12px;
+    font-size: 11px;
     display: block;
     letter-spacing: 6px;
     text-align: center;
@@ -81,30 +120,75 @@
     display: flex;
     gap: 32px;
     list-style: none;
+    align-items: center;
   }
 
   .nav-links a {
     color: #ccc;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 15px;
+    font-weight: 600;
     transition: color 0.3s;
-    letter-spacing: 1px;
   }
 
   .nav-links a:hover { color: var(--gold); }
 
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .cart-btn-trigger {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s;
+  }
+
+  .cart-btn-trigger:hover {
+    color: var(--gold);
+  }
+
+  .cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: var(--rose);
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+  }
+
   .nav-cta {
     background: var(--gold);
     color: var(--dark) !important;
-    padding: 8px 20px;
+    padding: 10px 24px;
     border-radius: 30px;
     font-weight: 700 !important;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.3s;
+  }
+
+  .nav-cta:hover {
+    background: var(--gold-light);
   }
 
   /* HERO */
   .hero {
     background: linear-gradient(135deg, var(--dark) 0%, var(--charcoal) 50%, #3d2435 100%);
-    min-height: 90vh;
+    min-height: 85vh;
     display: flex;
     align-items: center;
     position: relative;
@@ -132,23 +216,25 @@
     margin: 0 auto;
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.1fr 0.9fr;
     gap: 60px;
     align-items: center;
   }
 
   .hero-text h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(36px, 5vw, 64px);
+    font-size: clamp(38px, 5vw, 60px);
     color: #fff;
-    line-height: 1.15;
+    line-height: 1.2;
     margin-bottom: 20px;
+    font-weight: 900;
   }
 
   .hero-text h1 em {
     color: var(--gold);
     font-style: normal;
     display: block;
+    font-size: 1.1em;
   }
 
   .hero-text p {
@@ -156,6 +242,7 @@
     font-size: 17px;
     line-height: 1.8;
     margin-bottom: 36px;
+    max-width: 580px;
   }
 
   .hero-btns {
@@ -176,6 +263,8 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    border: none;
+    cursor: pointer;
   }
 
   .btn-primary:hover {
@@ -240,7 +329,7 @@
     color: var(--dark);
     padding: 6px 14px;
     border-radius: 30px;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
   }
 
@@ -284,6 +373,34 @@
     background: rgba(201,169,110,0.3);
   }
 
+  /* DYNAMIC FILTERS */
+  .filter-container {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.08);
+    color: var(--dark);
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    transition: all 0.3s;
+  }
+
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--dark);
+    color: #fff;
+    border-color: var(--dark);
+  }
+
   /* CATEGORIES */
   .section {
     padding: 80px 40px;
@@ -303,14 +420,15 @@
     letter-spacing: 4px;
     text-transform: uppercase;
     margin-bottom: 12px;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .section-title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(26px, 4vw, 40px);
+    font-size: clamp(28px, 4vw, 42px);
     color: var(--dark);
     line-height: 1.2;
+    font-weight: 700;
   }
 
   .categories-grid {
@@ -325,7 +443,6 @@
     overflow: hidden;
     aspect-ratio: 3/4;
     cursor: pointer;
-    group: true;
   }
 
   .cat-bg {
@@ -400,6 +517,9 @@
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     border: 1px solid rgba(0,0,0,0.06);
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .product-card:hover {
@@ -411,7 +531,7 @@
     position: relative;
     aspect-ratio: 1;
     overflow: hidden;
-    background: var(--blush);
+    background: var(--rose-light);
   }
 
   .product-img-wrap img {
@@ -434,6 +554,7 @@
     border-radius: 20px;
     font-size: 11px;
     font-weight: 700;
+    z-index: 5;
   }
 
   .product-badge.new { background: var(--gold); color: var(--dark); }
@@ -443,8 +564,8 @@
     position: absolute;
     top: 12px;
     left: 12px;
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     background: rgba(255,255,255,0.9);
     border-radius: 50%;
     display: flex;
@@ -453,12 +574,21 @@
     font-size: 15px;
     cursor: pointer;
     transition: all 0.3s;
+    z-index: 5;
+    color: var(--muted);
+    border: none;
   }
 
-  .product-wish:hover { background: var(--rose); }
+  .product-wish.liked {
+    color: var(--rose);
+  }
 
   .product-info {
-    padding: 16px;
+    padding: 20px 16px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .product-cat {
@@ -476,6 +606,7 @@
     color: var(--dark);
     margin-bottom: 4px;
     line-height: 1.3;
+    font-weight: 700;
   }
 
   .product-sub {
@@ -489,23 +620,24 @@
     align-items: center;
     justify-content: space-between;
     gap: 8px;
+    margin-top: auto;
   }
 
   .product-price {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     color: var(--rose);
   }
 
   .product-price-old {
-    font-size: 13px;
+    font-size: 12px;
     color: #bbb;
     text-decoration: line-through;
-    margin-right: 6px;
+    margin-left: 4px;
   }
 
   .product-currency {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     color: var(--muted);
   }
@@ -514,18 +646,18 @@
     background: var(--dark);
     color: #fff;
     border: none;
-    padding: 8px 16px;
+    padding: 10px 16px;
     border-radius: 30px;
-    font-size: 12px;
+    font-size: 13px;
     cursor: pointer;
     font-family: 'Cairo', sans-serif;
-    font-weight: 600;
+    font-weight: 700;
     transition: all 0.3s;
     white-space: nowrap;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
   }
 
   .btn-cart:hover {
@@ -580,10 +712,11 @@
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(201,169,110,0.2);
     border-radius: 16px;
-    padding: 20px 16px;
+    padding: 24px 16px;
     text-align: center;
     transition: all 0.3s;
     cursor: pointer;
+    position: relative;
   }
 
   .perfume-item:hover {
@@ -593,8 +726,8 @@
   }
 
   .perfume-img {
-    width: 80px;
-    height: 100px;
+    width: 90px;
+    height: 110px;
     object-fit: contain;
     margin: 0 auto 12px;
     display: block;
@@ -604,15 +737,16 @@
   .perfume-name {
     color: #fff;
     font-family: 'Playfair Display', serif;
-    font-size: 15px;
+    font-size: 16px;
     margin-bottom: 4px;
+    font-weight: 700;
   }
 
   .perfume-brand {
     color: var(--gold);
     font-size: 11px;
     letter-spacing: 2px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     display: block;
   }
 
@@ -620,6 +754,241 @@
     color: var(--rose);
     font-weight: 700;
     font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .btn-perfume-add {
+    background: var(--gold);
+    color: var(--dark);
+    border: none;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    transition: background 0.3s;
+  }
+
+  .btn-perfume-add:hover {
+    background: var(--gold-light);
+  }
+
+  /* SIDEBAR SHOPPING CART */
+  #cart-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 380px;
+    background: #fff;
+    box-shadow: 20px 0 50px rgba(0,0,0,0.25);
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(0,0,0,0.05);
+  }
+
+  #cart-sidebar.open {
+    transform: translateX(0);
+  }
+
+  #cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  #cart-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .cart-header {
+    background: var(--dark);
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .cart-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .close-cart-btn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .close-cart-btn:hover { color: var(--rose); }
+
+  .cart-shipping-progress {
+    background: var(--rose-light);
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    font-size: 13px;
+  }
+
+  .progress-bar-container {
+    background: rgba(0,0,0,0.06);
+    height: 6px;
+    border-radius: 10px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    background: var(--success);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s;
+  }
+
+  .cart-items-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .cart-item {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .cart-item-img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: var(--rose-light);
+  }
+
+  .cart-item-info {
+    flex-grow: 1;
+  }
+
+  .cart-item-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+
+  .cart-item-price {
+    font-size: 13px;
+    color: var(--rose);
+    font-weight: 700;
+  }
+
+  .cart-qty-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  .qty-btn {
+    background: rgba(0,0,0,0.05);
+    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  .qty-btn:hover {
+    background: var(--gold-light);
+  }
+
+  .cart-item-remove {
+    background: transparent;
+    border: none;
+    color: #bbb;
+    cursor: pointer;
+    font-size: 16px;
+    transition: color 0.3s;
+  }
+
+  .cart-item-remove:hover { color: var(--rose); }
+
+  .cart-footer {
+    padding: 20px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    background: var(--cream);
+  }
+
+  .cart-total-row {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--dark);
+    margin-bottom: 16px;
+  }
+
+  .btn-checkout {
+    background: var(--success);
+    color: white;
+    width: 100%;
+    border: none;
+    padding: 14px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(37,211,102,0.2);
+  }
+
+  .btn-checkout:hover {
+    background: #1eb954;
+    transform: translateY(-2px);
+  }
+
+  .empty-cart-state {
+    text-align: center;
+    color: var(--muted);
+    margin-top: 40px;
+  }
+
+  .empty-cart-state i {
+    font-size: 48px;
+    color: var(--gold);
+    margin-bottom: 16px;
   }
 
   /* WHATSAPP CTA */
@@ -649,6 +1018,7 @@
     color: #fff;
     margin-bottom: 16px;
     position: relative;
+    font-weight: 700;
   }
 
   .whatsapp-section p {
@@ -662,7 +1032,7 @@
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    background: #25D366;
+    background: var(--success);
     color: #fff;
     padding: 16px 40px;
     border-radius: 50px;
@@ -768,6 +1138,7 @@
     box-shadow: 0 8px 25px rgba(212,99,122,0.4);
     transition: all 0.3s;
     animation: chatPulse 2s infinite;
+    color: white;
   }
 
   @keyframes chatPulse {
@@ -781,7 +1152,7 @@
     position: absolute;
     bottom: 75px;
     left: 0;
-    width: 320px;
+    width: 340px;
     background: #fff;
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.18);
@@ -901,6 +1272,9 @@
     cursor: pointer;
     font-size: 16px;
     transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .chat-send:hover { background: var(--dark); }
@@ -910,13 +1284,13 @@
     position: fixed;
     bottom: 28px;
     right: 28px;
-    z-index: 999;
+    z-index: 998;
   }
 
   .float-wa a {
     width: 60px;
     height: 60px;
-    background: #25D366;
+    background: var(--success);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -926,6 +1300,7 @@
     box-shadow: 0 8px 25px rgba(37,211,102,0.4);
     transition: all 0.3s;
     animation: waPulse 2s infinite;
+    color: white;
   }
 
   @keyframes waPulse {
@@ -954,13 +1329,13 @@
   }
 
   .footer-brand .logo { font-size: 24px; margin-bottom: 14px; display: block; }
-  .footer-brand p { font-size: 14px; line-height: 1.7; max-width: 260px; }
+  .footer-brand p { font-size: 14px; line-height: 1.7; max-width: 280px; }
 
   .footer-col h4 {
     color: #fff;
     font-size: 15px;
     margin-bottom: 18px;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .footer-col ul { list-style: none; }
@@ -1001,6 +1376,7 @@
     color: #fff;
     margin-bottom: 12px;
     position: relative;
+    font-weight: 700;
   }
 
   .offer-banner p {
@@ -1038,6 +1414,7 @@
     .products-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
     .footer-grid { grid-template-columns: 1fr; }
     .chat-window { width: 280px; }
+    #cart-sidebar { width: 100%; }
   }
 
   /* Animations */
@@ -1054,13 +1431,16 @@
 </head>
 <body>
 
+<!-- Custom Elegant Alert Notifications Container -->
+<div id="toast-container"></div>
+
 <!-- HEADER -->
 <header>
   <div class="header-top">
-    🌸 شحن لجميع محافظات مصر &nbsp;|&nbsp; 🎁 هدية مجانية مع كل طلب فوق 500 جنيه &nbsp;|&nbsp; ✨ أصالة وأناقة في كل قطعة
+    🌸 شحن لجميع محافظات مصر &nbsp;|&nbsp; 🎁 هدية مجانية مع كل طلب فوق 1000 جنيه &nbsp;|&nbsp; ✨ أصالة وأناقة في كل قطعة
   </div>
   <nav>
-    <div class="logo">
+    <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
       Ayosha
       <span>S T O R E</span>
     </div>
@@ -1069,8 +1449,16 @@
       <li><a href="#products">المنتجات</a></li>
       <li><a href="#perfumes">العطور</a></li>
       <li><a href="#offers">العروض</a></li>
-      <li><a href="#contact" class="nav-cta">تواصلي معنا</a></li>
+      <li><a href="#contact">اتصلي بنا</a></li>
     </ul>
+    <div class="nav-actions">
+      <!-- Interactive Cart Button -->
+      <button class="cart-btn-trigger" onclick="toggleCart()" title="عرض السلة">
+        <i class="fa-solid fa-shopping-bag"></i>
+        <span class="cart-badge" id="cartCount">0</span>
+      </button>
+      <a href="#contact" class="nav-cta">طلب مباشر</a>
+    </div>
   </nav>
 </header>
 
@@ -1079,30 +1467,30 @@
   <div class="hero-pattern"></div>
   <div class="hero-content">
     <div class="hero-text">
-      <p class="section-tag">✦ الكوليكشن الجديد 2025</p>
+      <p class="section-tag">✦ الكوليكشن الجديد 2026</p>
       <h1>
-        أناقتك
-        <em>أولويتنا</em>
+        أناقتكِ الفريدة
+        <em>أولويتنا الأولى</em>
       </h1>
       <p>
-        اكتشفي عالم Ayosha Store — وجهتك الأولى للبراندات العالمية من عطور فاخرة، شنط أصيلة، وملابس راقية بأسعار تناسبك.
+        اكتشفي عالم Ayosha Store — وجهتك الأولى للبراندات العالمية الفاخرة. نقدم لكِ أرقى العطور، الشنط الأنيقة، والملابس الراقية بأسعار ومواصفات تناسب ذوقك الرفيع.
       </p>
       <div class="hero-btns">
-        <a href="#products" class="btn-primary">🛍️ تسوقي الآن</a>
-        <a href="https://wa.me/201006732527" target="_blank" class="btn-secondary">💬 واتساب</a>
+        <a href="#products" class="btn-primary"><i class="fa-solid fa-sparkles"></i> تسوقي الآن</a>
+        <a href="https://wa.me/201006732527" target="_blank" class="btn-secondary"><i class="fa-brands fa-whatsapp"></i> استفسار واتساب</a>
       </div>
     </div>
     <div class="hero-visual">
       <div class="hero-img">
-        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=600&fit=crop" alt="fashion">
+        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&auto=format&fit=crop&q=80" alt="[attachment_0](attachment)" onerror="handleImageError(this, 'clothes')">
         <span class="hero-badge">براند أصلي ✓</span>
       </div>
       <div class="hero-img">
-        <img src="https://images.unsplash.com/photo-1590736704728-f4730bb30770?w=300&h=200&fit=crop" alt="perfume">
+        <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400&auto=format&fit=crop&q=80" alt="" onerror="handleImageError(this, 'perfumes')">
         <span class="hero-badge">عطور فاخرة</span>
       </div>
       <div class="hero-img">
-        <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=300&h=200&fit=crop" alt="bags">
+        <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&auto=format&fit=crop&q=80" alt="" onerror="handleImageError(this, 'bags')">
         <span class="hero-badge">شنط براند</span>
       </div>
     </div>
@@ -1114,22 +1502,22 @@
   <div class="stats-inner">
     <div class="stat-item">
       <span class="stat-num">+5000</span>
-      <p class="stat-label">عميلة سعيدة</p>
+      <p class="stat-label">عميلة سعيدة تثق بنا</p>
     </div>
     <div class="stat-divider"></div>
     <div class="stat-item">
       <span class="stat-num">+200</span>
-      <p class="stat-label">منتج أصيل</p>
+      <p class="stat-label">منتج حصري راقٍ</p>
     </div>
     <div class="stat-divider"></div>
     <div class="stat-item">
       <span class="stat-num">3 أيام</span>
-      <p class="stat-label">توصيل لجميع محافظات مصر</p>
+      <p class="stat-label">أقصى مدة شحن في مصر</p>
     </div>
     <div class="stat-divider"></div>
     <div class="stat-item">
       <span class="stat-num">100%</span>
-      <p class="stat-label">ضمان الأصالة</p>
+      <p class="stat-label">ضمان جودة وأصالة</p>
     </div>
   </div>
 </div>
@@ -1138,256 +1526,103 @@
 <section class="section" id="categories">
   <div class="section-header">
     <p class="section-tag">تصفحي بحرية</p>
-    <h2 class="section-title">أقسام Ayosha Store</h2>
+    <h2 class="section-title">أقسام Ayosha Store المميزة</h2>
   </div>
   <div class="categories-grid">
-    <div class="cat-card">
-      <img class="cat-bg" src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=500&h=700&fit=crop" alt="ملابس">
+    <div class="cat-card" onclick="setFilter('clothes')">
+      <img class="cat-bg" src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=500&auto=format&fit=crop&q=80" alt="" onerror="handleImageError(this, 'clothes')">
       <div class="cat-overlay"></div>
       <div class="cat-info">
         <h3>الملابس البراند</h3>
         <p>أحدث كوليكشنات الموضة العالمية</p>
-        <a href="#products" class="cat-btn">تسوقي الآن</a>
+        <button class="cat-btn">تصفح الملابس</button>
       </div>
     </div>
-    <div class="cat-card">
-      <img class="cat-bg" src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500&h=700&fit=crop" alt="شنط">
+    <div class="cat-card" onclick="setFilter('bags')">
+      <img class="cat-bg" src="https://images.unsplash.com/photo-1590874103328-eacbc8761c15?w=500&auto=format&fit=crop&q=80" alt="" onerror="handleImageError(this, 'bags')">
       <div class="cat-overlay"></div>
       <div class="cat-info">
         <h3>الشنط الفاخرة</h3>
-        <p>شانيل، لويس فيتون، جوتشي والمزيد</p>
-        <a href="#products" class="cat-btn">اكتشفي</a>
+        <p>شانيل، لويس فيتون، غوتشي والمزيد</p>
+        <button class="cat-btn">اكتشفي الشنط</button>
       </div>
     </div>
-    <div class="cat-card">
-      <img class="cat-bg" src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500&h=700&fit=crop" alt="عطور">
+    <div class="cat-card" onclick="setFilter('perfumes')">
+      <img class="cat-bg" src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500&auto=format&fit=crop&q=80" alt="" onerror="handleImageError(this, 'perfumes')">
       <div class="cat-overlay"></div>
       <div class="cat-info">
         <h3>العطور الفاخرة</h3>
-        <p>عطور أصيلة لكل مناسبة</p>
-        <a href="#perfumes" class="cat-btn">شمي العطر</a>
+        <p>عطور ساحرة تناسب كل مناسبة</p>
+        <button class="cat-btn">تصفح العطور</button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRODUCTS -->
+<!-- PRODUCTS SECTION WITH FILTER -->
 <div class="products-bg" id="products">
   <div class="section" style="padding-top:0;padding-bottom:0">
     <div class="section-header">
-      <p class="section-tag">الأكثر مبيعاً</p>
-      <h2 class="section-title">منتجاتنا المميزة</h2>
+      <p class="section-tag">الأكثر طلباً ومبيعاً</p>
+      <h2 class="section-title">منتجاتنا الحصرية</h2>
     </div>
-    <div class="products-grid">
 
-      <!-- Product 1 -->
-      <div class="product-card">
-        <div class="product-img-wrap">
-          <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&h=400&fit=crop" alt="شنطة">
-          <span class="product-badge new">جديد</span>
-          <div class="product-wish">🤍</div>
-        </div>
-        <div class="product-info">
-          <span class="product-cat">شنط</span>
-          <h3 class="product-name">Classic Tote Bag</h3>
-          <p class="product-sub">جلد طبيعي - بيج / أسود</p>
-          <div class="product-price-row">
-            <div>
-              <span class="product-price-old">2,800 ج</span>
-              <span class="product-price">1,950</span>
-              <span class="product-currency">جنيه</span>
-            </div>
-            <a href="https://wa.me/201006732527?text=أريد الاستفسار عن شنطة Classic Tote" class="btn-cart" target="_blank">🛒 اطلبي</a>
-          </div>
-        </div>
-      </div>
+    <!-- Category Filters -->
+    <div class="filter-container">
+      <button class="filter-btn active" onclick="filterCategory('all', this)">كل المنتجات</button>
+      <button class="filter-btn" onclick="filterCategory('clothes', this)">الملابس البراند</button>
+      <button class="filter-btn" onclick="filterCategory('bags', this)">الشنط الفاخرة</button>
+      <button class="filter-btn" onclick="filterCategory('perfumes', this)">العطور العالمية</button>
+    </div>
 
-      <!-- Product 2 -->
-      <div class="product-card">
-        <div class="product-img-wrap">
-          <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=400&h=400&fit=crop" alt="فستان">
-          <span class="product-badge">bestseller</span>
-          <div class="product-wish">🤍</div>
-        </div>
-        <div class="product-info">
-          <span class="product-cat">ملابس</span>
-          <h3 class="product-name">Midi Wrap Dress</h3>
-          <p class="product-sub">فستان ميدي أنيق - ألوان متعددة</p>
-          <div class="product-price-row">
-            <div>
-              <span class="product-price">1,200</span>
-              <span class="product-currency">جنيه</span>
-            </div>
-            <a href="https://wa.me/201006732527?text=أريد الاستفسار عن Midi Wrap Dress" class="btn-cart" target="_blank">🛒 اطلبي</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product 3 -->
-      <div class="product-card">
-        <div class="product-img-wrap">
-          <img src="https://images.unsplash.com/photo-1600612253971-85b4e8cf1e5a?w=400&h=400&fit=crop" alt="حقيبة">
-          <span class="product-badge sale">-30%</span>
-          <div class="product-wish">🤍</div>
-        </div>
-        <div class="product-info">
-          <span class="product-cat">شنط</span>
-          <h3 class="product-name">Shoulder Chain Bag</h3>
-          <p class="product-sub">سلسلة ذهبية - جلد إيطالي</p>
-          <div class="product-price-row">
-            <div>
-              <span class="product-price-old">3,500 ج</span>
-              <span class="product-price">2,450</span>
-              <span class="product-currency">جنيه</span>
-            </div>
-            <a href="https://wa.me/201006732527?text=أريد الاستفسار عن Shoulder Chain Bag" class="btn-cart" target="_blank">🛒 اطلبي</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product 4 -->
-      <div class="product-card">
-        <div class="product-img-wrap">
-          <img src="https://images.unsplash.com/photo-1591369822096-ffd140ec948f?w=400&h=400&fit=crop" alt="بلوزة">
-          <span class="product-badge new">جديد</span>
-          <div class="product-wish">🤍</div>
-        </div>
-        <div class="product-info">
-          <span class="product-cat">ملابس</span>
-          <h3 class="product-name">Silk Blouse Premium</h3>
-          <p class="product-sub">حرير طبيعي - أبيض / كريمي</p>
-          <div class="product-price-row">
-            <div>
-              <span class="product-price">850</span>
-              <span class="product-currency">جنيه</span>
-            </div>
-            <a href="https://wa.me/201006732527?text=أريد الاستفسار عن Silk Blouse" class="btn-cart" target="_blank">🛒 اطلبي</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product 5 -->
-      <div class="product-card">
-        <div class="product-img-wrap">
-          <img src="https://images.unsplash.com/photo-1594938298603-c8148c4b4993?w=400&h=400&fit=crop" alt="حذاء">
-          <span class="product-badge">bestseller</span>
-          <div class="product-wish">🤍</div>
-        </div>
-        <div class="product-info">
-          <span class="product-cat">إكسسوار</span>
-          <h3 class="product-name">Scarf Luxury Collection</h3>
-          <p class="product-sub">إيشارب كاشمير فاخر - ألوان موسمية</p>
-          <div class="product-price-row">
-            <div>
-              <span class="product-price">650</span>
-              <span class="product-currency">جنيه</span>
-            </div>
-            <a href="https://wa.me/201006732527?text=أريد الاستفسار عن Scarf Luxury" class="btn-cart" target="_blank">🛒 اطلبي</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product 6 -->
-      <div class="product-card">
-        <div class="product-img-wrap">
-          <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400&h=400&fit=crop" alt="بدلة">
-          <span class="product-badge sale">-20%</span>
-          <div class="product-wish">🤍</div>
-        </div>
-        <div class="product-info">
-          <span class="product-cat">ملابس</span>
-          <h3 class="product-name">Power Suit Set</h3>
-          <p class="product-sub">بدلة بناطيل - أوف وايت / أسود</p>
-          <div class="product-price-row">
-            <div>
-              <span class="product-price-old">2,200 ج</span>
-              <span class="product-price">1,760</span>
-              <span class="product-currency">جنيه</span>
-            </div>
-            <a href="https://wa.me/201006732527?text=أريد الاستفسار عن Power Suit" class="btn-cart" target="_blank">🛒 اطلبي</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product 7 -->
-      <div class="product-card">
-        <div class="product-img-wrap">
-          <img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=400&h=400&fit=crop" alt="شنطة صغيرة">
-          <span class="product-badge new">حصري</span>
-          <div class="product-wish">🤍</div>
-        </div>
-        <div class="product-info">
-          <span class="product-cat">شنط</span>
-          <h3 class="product-name">Mini Crossbody Gold</h3>
-          <p class="product-sub">شنطة صغيرة بسلسلة ذهبية</p>
-          <div class="product-price-row">
-            <div>
-              <span class="product-price">1,350</span>
-              <span class="product-currency">جنيه</span>
-            </div>
-            <a href="https://wa.me/201006732527?text=أريد الاستفسار عن Mini Crossbody" class="btn-cart" target="_blank">🛒 اطلبي</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product 8 -->
-      <div class="product-card">
-        <div class="product-img-wrap">
-          <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=400&h=400&fit=crop" alt="فستان سهرة">
-          <span class="product-badge">رقي فاخر</span>
-          <div class="product-wish">🤍</div>
-        </div>
-        <div class="product-info">
-          <span class="product-cat">ملابس سهرة</span>
-          <h3 class="product-name">Evening Gown Luxe</h3>
-          <p class="product-sub">فستان سهرة مطرز - أحمر / ذهبي</p>
-          <div class="product-price-row">
-            <div>
-              <span class="product-price">3,200</span>
-              <span class="product-currency">جنيه</span>
-            </div>
-            <a href="https://wa.me/201006732527?text=أريد الاستفسار عن Evening Gown" class="btn-cart" target="_blank">🛒 اطلبي</a>
-          </div>
-        </div>
-      </div>
-
+    <!-- Dynamic Products Grid -->
+    <div class="products-grid" id="productsGrid">
+      <!-- Items will be generated dynamically by JavaScript -->
     </div>
   </div>
 </div>
 
-<!-- PERFUMES -->
+<!-- EXCLUSIVE PERFUME BANNER & FEATURE -->
 <div class="perfume-banner" id="perfumes">
   <div class="perfume-inner">
     <div class="perfume-text">
-      <p class="section-tag">✦ عطور حصرية</p>
+      <p class="section-tag">✦ سحر الجاذبية والجمال</p>
       <h2 class="section-title">كوليكشن العطور الفاخرة</h2>
-      <p>عطور أصيلة 100% من أشهر الماركات العالمية. اختاري عطرك المفضل وأضيفي لمسة أناقة لكل يوم.</p>
-      <a href="https://wa.me/201006732527?text=أريد الاستفسار عن العطور" class="btn-primary" target="_blank">💛 تواصلي لأوردر</a>
+      <p>تألقي بعبير عطور أصلية 100% مستوحاة من أشهر الماركات الباريسية والعالمية الأكثر مبيعاً في مصر. ثبات يدوم طويلاً يمنحكِ حضوراً لا ينسى.</p>
+      <a href="https://wa.me/201006732527?text=أريد الاستفسار عن كوليكشن العطور الفاخرة" class="btn-primary" target="_blank">
+        <i class="fa-solid fa-magic"></i> استشيري خبيرة العطور واتساب
+      </a>
     </div>
+    
+    <!-- Perfumes Special Grid with Direct Shopping option -->
     <div class="perfume-grid">
       <div class="perfume-item">
-        <img class="perfume-img" src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=100&h=130&fit=crop" alt="عطر">
+        <img class="perfume-img" src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=150&auto=format&fit=crop&q=80" alt="" onerror="handleImageError(this, 'perfumes')">
         <p class="perfume-name">La Vie Est Belle</p>
         <span class="perfume-brand">LANCÔME</span>
         <p class="perfume-price">1,850 جنيه</p>
+        <button class="btn-perfume-add" onclick="addById(101)">إضافة للسلة <i class="fa-solid fa-plus"></i></button>
       </div>
       <div class="perfume-item">
-        <img class="perfume-img" src="https://images.unsplash.com/photo-1588514912908-3e4e3fe0f5e9?w=100&h=130&fit=crop" alt="عطر">
+        <img class="perfume-img" src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=150&auto=format&fit=crop&q=80" alt="" onerror="handleImageError(this, 'perfumes')">
         <p class="perfume-name">Miss Dior Blooming</p>
         <span class="perfume-brand">DIOR</span>
         <p class="perfume-price">2,400 جنيه</p>
+        <button class="btn-perfume-add" onclick="addById(102)">إضافة للسلة <i class="fa-solid fa-plus"></i></button>
       </div>
       <div class="perfume-item">
-        <img class="perfume-img" src="https://images.unsplash.com/photo-1595535873420-a599195b3f4a?w=100&h=130&fit=crop" alt="عطر">
+        <img class="perfume-img" src="https://images.unsplash.com/photo-1547887538-047f814a2a45?w=150&auto=format&fit=crop&q=80" alt="" onerror="handleImageError(this, 'perfumes')">
         <p class="perfume-name">Chance Eau Tendre</p>
         <span class="perfume-brand">CHANEL</span>
         <p class="perfume-price">2,900 جنيه</p>
+        <button class="btn-perfume-add" onclick="addById(103)">إضافة للسلة <i class="fa-solid fa-plus"></i></button>
       </div>
       <div class="perfume-item">
-        <img class="perfume-img" src="https://images.unsplash.com/photo-1547887538-047f814a2a45?w=100&h=130&fit=crop" alt="عطر">
+        <img class="perfume-img" src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=150&auto=format&fit=crop&q=80" alt="" onerror="handleImageError(this, 'perfumes')">
         <p class="perfume-name">Black Opium</p>
         <span class="perfume-brand">YSL</span>
         <p class="perfume-price">2,150 جنيه</p>
+        <button class="btn-perfume-add" onclick="addById(104)">إضافة للسلة <i class="fa-solid fa-plus"></i></button>
       </div>
     </div>
   </div>
@@ -1395,66 +1630,66 @@
 
 <!-- OFFER BANNER -->
 <div class="offer-banner" id="offers">
-  <h2>🎀 عرض خاص — توصيل مجاني!</h2>
-  <p>عند الطلب بأكثر من 1000 جنيه تحصلي على توصيل مجاني لأي محافظة في مصر + هدية مجانية مفاجأة</p>
-  <a href="https://wa.me/201006732527?text=أريد الاستفادة من عرض التوصيل المجاني" class="btn-primary" target="_blank">🛍️ اطلبي الآن</a>
+  <h2>🎀 عرض مميز — الشحن علينا!</h2>
+  <p>عند تسوقك بـ 1000 جنيه أو أكثر، ستحصلين على توصيل مجاني سريع لأي مكان بمصر + هدية حصرية مميزة داخل طردك</p>
+  <a href="#products" class="btn-primary"><i class="fa-solid fa-shopping-basket"></i> ابدئي التسوق الآن</a>
 </div>
 
-<!-- WHATSAPP CONTACT -->
+<!-- WHATSAPP CONTACT & DIRECT INQUIRY -->
 <div class="whatsapp-section" id="contact">
   <div style="position:relative;z-index:2">
-    <p class="section-tag" style="color:var(--gold)">📞 تواصلي معنا</p>
-    <h2>هنكون معاكي في أي وقت!</h2>
-    <p>للاستفسار عن المنتجات، الأسعار، المقاسات أو الطلب المباشر — تواصلي على واتساب أو اتصلي بنا</p>
+    <p class="section-tag" style="color:var(--gold)">📞 يسعدنا خدمتك</p>
+    <h2>متواجدون دائماً لأجلك!</h2>
+    <p>هل تودين الاستفسار عن مقاس معين، خام أو تودين طلب منتج خاص لم يعرض بعد؟ راسلينا وسنهتم بكِ فوراً.</p>
     <a href="https://wa.me/201006732527" class="whatsapp-btn" target="_blank">
-      💬 راسلينا على واتساب
+      <i class="fa-brands fa-whatsapp"></i> راسلينا عبر واتساب مباشر
     </a>
     <br>
     <div class="phone-display">
-      📞 +20 100 673 2527
+      <i class="fa-solid fa-phone"></i> +20 100 673 2527
     </div>
   </div>
 </div>
 
-<!-- SOCIAL MEDIA -->
+<!-- SOCIAL MEDIA & TRUST BADGES -->
 <div class="social-section">
   <div class="section-header">
-    <p class="section-tag">تابعينا</p>
-    <h2 class="section-title">تواصلي معنا على السوشيال ميديا</h2>
+    <p class="section-tag">انضمي لعائلتنا</p>
+    <h2 class="section-title">تابعي جديدنا وعروضنا الحصرية</h2>
   </div>
   <div class="social-links">
-    <a href="#" class="social-card social-instagram">
-      <span class="social-icon">📸</span> Instagram — @ayosha.store
+    <a href="https://instagram.com" target="_blank" class="social-card social-instagram">
+      <i class="fa-brands fa-instagram social-icon"></i> انستجرام — @ayosha.store
     </a>
-    <a href="#" class="social-card social-facebook">
-      <span class="social-icon">👤</span> Facebook — Ayosha Store
+    <a href="https://facebook.com" target="_blank" class="social-card social-facebook">
+      <i class="fa-brands fa-facebook-f social-icon"></i> فيسبوك — Ayosha Store
     </a>
-    <a href="#" class="social-card social-tiktok">
-      <span class="social-icon">🎵</span> TikTok — @ayosha_store
+    <a href="https://tiktok.com" target="_blank" class="social-card social-tiktok">
+      <i class="fa-brands fa-tiktok social-icon"></i> تيك توك — @ayosha_store
     </a>
   </div>
 
   <!-- Trust badges -->
   <div style="display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin-top:20px">
-    <div style="text-align:center;padding:20px 30px;background:#fff;border-radius:16px;border:1px solid rgba(0,0,0,0.07);min-width:150px;box-shadow:0 4px 20px rgba(0,0,0,0.05)">
-      <div style="font-size:32px;margin-bottom:8px">🔒</div>
-      <p style="font-weight:700;font-size:14px;color:var(--dark)">دفع آمن</p>
-      <p style="font-size:12px;color:var(--muted)">كاش عند الاستلام</p>
+    <div style="text-align:center;padding:24px 30px;background:#fff;border-radius:16px;border:1px solid rgba(0,0,0,0.07);min-width:180px;box-shadow:0 4px 20px rgba(0,0,0,0.05)">
+      <div style="font-size:32px;margin-bottom:8px;color:var(--gold)"><i class="fa-solid fa-handshake-simple"></i></div>
+      <p style="font-weight:700;font-size:14px;color:var(--dark)">الدفع عند الاستلام</p>
+      <p style="font-size:12px;color:var(--muted)">عاينـي جودتنا بنفسكِ أولاً</p>
     </div>
-    <div style="text-align:center;padding:20px 30px;background:#fff;border-radius:16px;border:1px solid rgba(0,0,0,0.07);min-width:150px;box-shadow:0 4px 20px rgba(0,0,0,0.05)">
-      <div style="font-size:32px;margin-bottom:8px">🚚</div>
-      <p style="font-weight:700;font-size:14px;color:var(--dark)">توصيل سريع</p>
-      <p style="font-size:12px;color:var(--muted)">2-3 أيام عمل</p>
+    <div style="text-align:center;padding:24px 30px;background:#fff;border-radius:16px;border:1px solid rgba(0,0,0,0.07);min-width:180px;box-shadow:0 4px 20px rgba(0,0,0,0.05)">
+      <div style="font-size:32px;margin-bottom:8px;color:var(--gold)"><i class="fa-solid fa-truck"></i></div>
+      <p style="font-weight:700;font-size:14px;color:var(--dark)">شحن فائق السرعة</p>
+      <p style="font-size:12px;color:var(--muted)">خلال 48 ساعة كحد أقصى</p>
     </div>
-    <div style="text-align:center;padding:20px 30px;background:#fff;border-radius:16px;border:1px solid rgba(0,0,0,0.07);min-width:150px;box-shadow:0 4px 20px rgba(0,0,0,0.05)">
-      <div style="font-size:32px;margin-bottom:8px">✅</div>
-      <p style="font-weight:700;font-size:14px;color:var(--dark)">منتجات أصلية</p>
-      <p style="font-size:12px;color:var(--muted)">ضمان 100%</p>
+    <div style="text-align:center;padding:24px 30px;background:#fff;border-radius:16px;border:1px solid rgba(0,0,0,0.07);min-width:180px;box-shadow:0 4px 20px rgba(0,0,0,0.05)">
+      <div style="font-size:32px;margin-bottom:8px;color:var(--gold)"><i class="fa-solid fa-certificate"></i></div>
+      <p style="font-weight:700;font-size:14px;color:var(--dark)">جودة بريميوم</p>
+      <p style="font-size:12px;color:var(--muted)">مستوردة ومضمونة 100%</p>
     </div>
-    <div style="text-align:center;padding:20px 30px;background:#fff;border-radius:16px;border:1px solid rgba(0,0,0,0.07);min-width:150px;box-shadow:0 4px 20px rgba(0,0,0,0.05)">
-      <div style="font-size:32px;margin-bottom:8px">🔄</div>
-      <p style="font-weight:700;font-size:14px;color:var(--dark)">إرجاع واستبدال</p>
-      <p style="font-size:12px;color:var(--muted)">خلال 7 أيام</p>
+    <div style="text-align:center;padding:24px 30px;background:#fff;border-radius:16px;border:1px solid rgba(0,0,0,0.07);min-width:180px;box-shadow:0 4px 20px rgba(0,0,0,0.05)">
+      <div style="font-size:32px;margin-bottom:8px;color:var(--gold)"><i class="fa-solid fa-rotate-left"></i></div>
+      <p style="font-weight:700;font-size:14px;color:var(--dark)">مرونة الاستبدال</p>
+      <p style="font-size:12px;color:var(--muted)">خلال 7 أيام من استلامك</p>
     </div>
   </div>
 </div>
@@ -1464,140 +1699,617 @@
   <div class="footer-grid">
     <div class="footer-brand">
       <span class="logo">Ayosha <span>S T O R E</span></span>
-      <p>وجهتك الأولى للأناقة والبراندات العالمية في مصر. نقدم أفضل المنتجات بأسعار تنافسية وخدمة عملاء متميزة.</p>
+      <p>وجهتك الأولى للأناقة والبراندات الفاخرة في مصر. نوفر أرقى القطع المميزة بأسعار تنافسية وخدمة عملاء فائقة الرقي.</p>
       <div style="margin-top:16px;color:var(--gold);direction:ltr;font-size:15px;font-weight:700">
         📞 +20 100 673 2527
       </div>
     </div>
     <div class="footer-col">
-      <h4>الأقسام</h4>
+      <h4>تسوّق الأقسام</h4>
       <ul>
-        <li><a href="#products">الملابس البراند</a></li>
-        <li><a href="#products">الشنط الفاخرة</a></li>
-        <li><a href="#perfumes">العطور</a></li>
-        <li><a href="#products">الإكسسوارات</a></li>
-        <li><a href="#offers">العروض الخاصة</a></li>
+        <li><a href="#products" onclick="setFilter('clothes')">الملابس البراند</a></li>
+        <li><a href="#products" onclick="setFilter('bags')">الشنط الفاخرة</a></li>
+        <li><a href="#perfumes">العطور والروائح</a></li>
+        <li><a href="#offers">العروض الخاصة والخصومات</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>خدمة العملاء</h4>
+      <h4>الدعم والمساعدة</h4>
       <ul>
-        <li><a href="https://wa.me/201006732527" target="_blank">واتساب مباشر</a></li>
-        <li><a href="#">سياسة الإرجاع</a></li>
-        <li><a href="#">الشحن والتوصيل</a></li>
-        <li><a href="#">الأسئلة الشائعة</a></li>
-        <li><a href="#">تتبع الطلب</a></li>
+        <li><a href="https://wa.me/201006732527" target="_blank">طلب مباشر عبر واتساب</a></li>
+        <li><a href="#" onclick="event.preventDefault(); showToast('سياسة الاسترجاع سهلة جداً تواصلوا معنا واتساب وسيتم الإجراء فوراً 🌸')">سياسة الإرجاع السريع</a></li>
+        <li><a href="#" onclick="event.preventDefault(); showToast('الشحن لجميع المحافظات خلال 2-3 أيام فقط 🚚')">معلومات الشحن والتوصيل</a></li>
+        <li><a href="#" onclick="event.preventDefault(); toggleChat()">الرد الآلي والدعم الفني</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>تابعينا</h4>
+      <h4>النشرة الأسبوعية</h4>
       <ul>
-        <li><a href="#">Instagram</a></li>
-        <li><a href="#">Facebook</a></li>
-        <li><a href="#">TikTok</a></li>
+        <li>احصلي على تخفيض 10% على طلبك القادم</li>
       </ul>
-      <div style="margin-top:20px">
-        <p style="font-size:12px;margin-bottom:8px;color:#666">اشتركي في نشرتنا البريدية</p>
+      <div style="margin-top:15px">
+        <p style="font-size:12px;margin-bottom:8px;color:#666">اكتبي بريدك الإلكتروني هنا:</p>
         <div style="display:flex;gap:8px">
-          <input placeholder="إيميلك هنا" style="flex:1;padding:8px 12px;border:1px solid rgba(201,169,110,0.4);border-radius:20px;font-family:'Cairo',sans-serif;font-size:12px;background:rgba(255,255,255,0.05);color:#ccc;outline:none">
-          <button style="background:var(--gold);border:none;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:14px">→</button>
+          <input id="newsletter-email" placeholder="بريدك الإلكتروني" style="flex:1;padding:8px 12px;border:1px solid rgba(201,169,110,0.4);border-radius:20px;font-family:'Cairo',sans-serif;font-size:12px;background:rgba(255,255,255,0.05);color:#ccc;outline:none">
+          <button onclick="subscribeNewsletter()" style="background:var(--gold);border:none;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:14px;color:var(--dark)">→</button>
         </div>
       </div>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 <span>Ayosha Store</span> — جميع الحقوق محفوظة</p>
-    <p>صُنع بـ 🌸 لأجمل النساء</p>
+    <p>© 2026 <span>Ayosha Store</span> — جميع الحقوق محفوظة</p>
+    <p>صُنع بكل حب 🌸 لجمال وتألق النساء في مصر</p>
   </div>
 </footer>
 
-<!-- FLOATING WHATSAPP -->
-<div class="float-wa">
-  <a href="https://wa.me/201006732527" target="_blank" title="واتساب">💬</a>
+<!-- INTERACTIVE SIDEBAR CART -->
+<div id="cart-overlay" onclick="toggleCart()"></div>
+<div id="cart-sidebar">
+  <div class="cart-header">
+    <h3><i class="fa-solid fa-shopping-basket"></i> حقيبة المشتريات</h3>
+    <button class="close-cart-btn" onclick="toggleCart()">&times;</button>
+  </div>
+  
+  <!-- Shipping Goal Progress Bar -->
+  <div class="cart-shipping-progress" id="shippingGoalMsg">
+    تحتاجين إلى <span style="font-weight:700; color:var(--rose);" id="remainingAmount">1000 جنيه</span> إضافية للحصول على شحن مجاني وهدية!
+    <div class="progress-bar-container">
+      <div class="progress-bar" id="shippingProgressBar"></div>
+    </div>
+  </div>
+
+  <!-- Cart List -->
+  <div class="cart-items-container" id="cartItemsList">
+    <!-- Dynamic item elements -->
+  </div>
+
+  <!-- Footer Actions inside Cart -->
+  <div class="cart-footer">
+    <div class="cart-total-row">
+      <span>المجموع الإجمالي:</span>
+      <span id="cartTotalPrice" style="color:var(--rose);">0 جنيه</span>
+    </div>
+    <button class="btn-checkout" onclick="sendCartOrder()">
+      <i class="fa-brands fa-whatsapp"></i> إتمام الطلب سريعاً واتساب
+    </button>
+  </div>
 </div>
 
-<!-- CHATBOT -->
+<!-- FLOATING WHATSAPP -->
+<div class="float-wa">
+  <a href="https://wa.me/201006732527" target="_blank" title="تواصل واتساب سريع"><i class="fa-brands fa-whatsapp"></i></a>
+</div>
+
+<!-- DYNAMIC CHATBOT CUSTOMER SERVICE -->
 <div class="chat-bubble">
-  <button class="chat-toggle" onclick="toggleChat()" title="خدمة العملاء">💁‍♀️</button>
+  <button class="chat-toggle" onclick="toggleChat()" title="مساعدة المبيعات والعملاء"><i class="fa-solid fa-headset"></i></button>
   <div class="chat-window" id="chatWindow">
     <div class="chat-head">
-      <div class="chat-avatar">👸</div>
+      <div class="chat-avatar"><i class="fa-solid fa-wand-magic-sparkles" style="color: var(--dark);"></i></div>
       <div class="chat-head-text">
-        <h4>Ayosha Store</h4>
-        <p>● متاحة الآن</p>
+        <h4>خدمة عملاء أيوشة</h4>
+        <p>● متواجدة للرد الفوري</p>
       </div>
     </div>
     <div class="chat-messages" id="chatMessages">
-      <div class="msg msg-bot">أهلاً بيكي في Ayosha Store! 🌸 أنا هنا أساعدك. إيه اللي تحتاجيه؟</div>
+      <div class="msg msg-bot">أهلاً بكِ في Ayosha Store! 🌸 أنا المساعد الذكي، كيف أستطيع إسعادكِ وتسهيل طلبكِ اليوم؟</div>
     </div>
     <div class="chat-options" id="chatOptions">
-      <button class="chat-opt" onclick="sendOption('أسعار المنتجات')">💰 الأسعار</button>
-      <button class="chat-opt" onclick="sendOption('كيف أطلب؟')">🛍️ طريقة الطلب</button>
-      <button class="chat-opt" onclick="sendOption('توصيل لأي محافظة؟')">🚚 التوصيل</button>
-      <button class="chat-opt" onclick="sendOption('هل المنتجات أصلية؟')">✅ الأصالة</button>
+      <button class="chat-opt" onclick="sendOption('أسعار المنتجات')">💰 أسعار الكوليكشن</button>
+      <button class="chat-opt" onclick="sendOption('كيف أطلب؟')">🛍️ كيف أشتري؟</button>
+      <button class="chat-opt" onclick="sendOption('توصيل لأي محافظة؟')">🚚 مصاريف الشحن</button>
+      <button class="chat-opt" onclick="sendOption('هل المنتجات أصلية؟')">✨ ضمان الجودة</button>
     </div>
     <div class="chat-footer">
-      <input type="text" id="chatInput" placeholder="اكتبي سؤالك..." onkeypress="if(event.key==='Enter') sendMessage()">
-      <button class="chat-send" onclick="sendMessage()">↑</button>
+      <input type="text" id="chatInput" placeholder="اكتبي سؤالك هنا..." onkeypress="if(event.key==='Enter') sendMessage()">
+      <button class="chat-send" onclick="sendMessage()"><i class="fa-solid fa-paper-plane-rtl"></i></button>
     </div>
   </div>
 </div>
 
 <script>
-  // Chatbot
-  const responses = {
-    'أسعار المنتجات': 'أسعارنا تبدأ من 650 جنيه للإكسسوارات، 850 جنيه للملابس، 1350 جنيه للشنط، و1850 جنيه للعطور. كلها براندات أصلية 💛',
-    'كيف أطلب؟': 'بسيطة! اضغطي على "اطلبي" جنب أي منتج أو راسلينا على واتساب على +201006732527 وقوليلنا اسم المنتج والمقاس 🌸',
-    'توصيل لأي محافظة؟': 'بنوصل لجميع محافظات مصر خلال 2-3 أيام عمل. التوصيل مجاني عند الطلب بأكثر من 1000 جنيه! 🚚',
-    'هل المنتجات أصلية؟': 'أيوه 100%! كل منتجاتنا أصلية ومعاها ضمان. مش بنتاجر في منتجات مقلدة أبداً ✅',
+  // Complete product list array with realistic EGP prices and working images
+  const allProducts = [
+    {
+      id: 1,
+      name: "Classic Tote Bag",
+      category: "bags",
+      tag: "جديد",
+      sub: "حقيبة توت من الجلد الإيطالي الفاخر - ألوان راقية",
+      price: 1950,
+      oldPrice: 2800,
+      img: "https://images.unsplash.com/photo-1591561954557-26941169b49e?w=500&auto=format&fit=crop&q=80"
+    },
+    {
+      id: 2,
+      name: "Midi Wrap Dress",
+      category: "clothes",
+      tag: "الأكثر مبيعاً",
+      sub: "فستان ميدي أنيق ومريح للغاية - ألوان متعددة",
+      price: 1200,
+      oldPrice: null,
+      img: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500&auto=format&fit=crop&q=80"
+    },
+    {
+      id: 3,
+      name: "Shoulder Chain Bag",
+      category: "bags",
+      tag: "خصم خاص",
+      sub: "سلسلة كتف ذهبية مصقولة - جلد فاخر ناعم",
+      price: 2450,
+      oldPrice: 3500,
+      img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500&auto=format&fit=crop&q=80"
+    },
+    {
+      id: 4,
+      name: "Silk Blouse Premium",
+      category: "clothes",
+      tag: "جديد",
+      sub: "بلوزة حرير طبيعي نقي 100% - لون عاجي",
+      price: 850,
+      oldPrice: null,
+      img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&auto=format&fit=crop&q=80"
+    },
+    {
+      id: 5,
+      name: "Luxury Scarf Collection",
+      category: "clothes",
+      tag: "الأكثر مبيعاً",
+      sub: "شال وإيشارب كشمير ناعم ومطرز - مناسب للشتاء والصيف",
+      price: 650,
+      oldPrice: null,
+      img: "https://images.unsplash.com/photo-1584030373081-f37b7bb4fa8e?w=500&auto=format&fit=crop&q=80"
+    },
+    {
+      id: 6,
+      name: "Power Suit Set",
+      category: "clothes",
+      tag: "خصم رائع",
+      sub: "بدلة رسمية كلاسيكية قطعتين - قصة مريحة وأنيقة",
+      price: 1760,
+      oldPrice: 2200,
+      img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500&auto=format&fit=crop&q=80"
+    },
+    {
+      id: 7,
+      name: "Mini Crossbody Gold",
+      category: "bags",
+      tag: "حصري",
+      sub: "حقيبة كروس صغيرة بلمسات وقفل ذهبي لامع",
+      price: 1350,
+      oldPrice: null,
+      img: "https://images.unsplash.com/photo-1590739225287-bd2d544aa12e?w=500&auto=format&fit=crop&q=80"
+    },
+    {
+      id: 8,
+      name: "Evening Gown Luxe",
+      category: "clothes",
+      tag: "فخامة ورقي",
+      sub: "فستان سهرة مطرز بالكامل - أحمر ملكي وذهبي جذاب",
+      price: 3200,
+      oldPrice: null,
+      img: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=500&auto=format&fit=crop&q=80"
+    },
+    
+    // Perfume Category mapping
+    {
+      id: 101,
+      name: "La Vie Est Belle",
+      category: "perfumes",
+      tag: "عطر فرنسي",
+      sub: "من بيت عطور لانكوم - 100 مل ثبات قوي",
+      price: 1850,
+      oldPrice: null,
+      img: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=150&auto=format&fit=crop&q=80"
+    },
+    {
+      id: 102,
+      name: "Miss Dior Blooming",
+      category: "perfumes",
+      tag: "الأكثر مبيعاً",
+      sub: "ديور بلومينغ الفاخرة - عطر رقيق ومنعش",
+      price: 2400,
+      oldPrice: null,
+      img: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=150&auto=format&fit=crop&q=80"
+    },
+    {
+      id: 103,
+      name: "Chance Eau Tendre",
+      category: "perfumes",
+      tag: "راقي وحصري",
+      sub: "عطر تندر الكلاسيكي من بيت شانيل العريق",
+      price: 2900,
+      oldPrice: null,
+      img: "https://images.unsplash.com/photo-1547887538-047f814a2a45?w=150&auto=format&fit=crop&q=80"
+    },
+    {
+      id: 104,
+      name: "Black Opium",
+      category: "perfumes",
+      tag: "أصلي 100%",
+      sub: "عطر بلاك اوبيوم الحسي الفاتن من إيف سان لوران",
+      price: 2150,
+      oldPrice: null,
+      img: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=150&auto=format&fit=crop&q=80"
+    }
+  ];
+
+  // Dynamic States
+  let shoppingCart = [];
+  let likedItems = [];
+
+  // Image fallback handler to prevent any broken images
+  function handleImageError(img, type) {
+    img.onerror = null; // Prevent infinite loop on failure of fallback URL
+    const fallbacks = {
+      clothes: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400',
+      bags: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400',
+      perfumes: 'https://images.unsplash.com/photo-1541643600914-78b084683702?w=400',
+      default: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400'
+    };
+    img.src = fallbacks[type] || fallbacks.default;
+  }
+
+  // Init App View
+  document.addEventListener("DOMContentLoaded", () => {
+    renderProductsList('all');
+    loadWishlistState();
+    loadCartState();
+  });
+
+  // Render products into grid dynamically
+  function renderProductsList(category = 'all') {
+    const grid = document.getElementById("productsGrid");
+    grid.innerHTML = "";
+
+    const filtered = category === 'all' 
+      ? allProducts.filter(p => p.id < 100) // Default only main products in upper section
+      : allProducts.filter(p => p.category === category);
+
+    filtered.forEach(p => {
+      const isLiked = likedItems.includes(p.id);
+      const discountPercent = p.oldPrice ? Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100) : null;
+      
+      const badgeHTML = p.oldPrice 
+        ? `<span class="product-badge sale">خصم ${discountPercent}%-</span>`
+        : `<span class="product-badge ${p.tag === 'جديد' ? 'new' : ''}">${p.tag}</span>`;
+
+      const priceHTML = p.oldPrice 
+        ? `<div>
+             <span class="product-price-old">${p.oldPrice.toLocaleString('ar-EG')} ج.م</span>
+             <span class="product-price">${p.price.toLocaleString('ar-EG')}</span>
+             <span class="product-currency">جنيه</span>
+           </div>`
+        : `<div>
+             <span class="product-price">${p.price.toLocaleString('ar-EG')}</span>
+             <span class="product-currency">جنيه</span>
+           </div>`;
+
+      const card = `
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="${p.img}" alt="" onerror="handleImageError(this, '${p.category}')">
+            ${badgeHTML}
+            <button class="product-wish ${isLiked ? 'liked' : ''}" onclick="toggleLike(${p.id}, this)">
+              <i class="${isLiked ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
+            </button>
+          </div>
+          <div class="product-info">
+            <div>
+              <span class="product-cat">${p.category === 'clothes' ? 'ملابس براند' : p.category === 'bags' ? 'حقائب راقية' : 'عطور مميزة'}</span>
+              <h3 class="product-name">${p.name}</h3>
+              <p class="product-sub">${p.sub}</p>
+            </div>
+            <div class="product-price-row">
+              ${priceHTML}
+              <button class="btn-cart" onclick="addToCart(${p.id})">
+                <i class="fa-solid fa-shopping-cart"></i> اطلبي
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+      grid.innerHTML += card;
+    });
+  }
+
+  // Filter Trigger
+  function filterCategory(category, button) {
+    document.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
+    button.classList.add("active");
+    renderProductsList(category);
+  }
+
+  // Set filter programmatically from anywhere (e.g., categories cards or footer links)
+  function setFilter(category) {
+    const filterBtn = Array.from(document.querySelectorAll(".filter-btn")).find(btn => btn.outerHTML.includes(category));
+    if (filterBtn) {
+      filterBtn.click();
+    } else {
+      renderProductsList(category);
+    }
+    // Scroll to products section
+    document.getElementById("products").scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // custom elegant Toast notification
+  function showToast(message) {
+    const container = document.getElementById("toast-container");
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    toast.innerHTML = `<i class="fa-solid fa-sparkles" style="color:var(--gold)"></i> <span>${message}</span>`;
+    
+    container.appendChild(toast);
+    
+    // trigger animation reflow
+    setTimeout(() => {
+      toast.classList.add("show");
+    }, 10);
+
+    // remove after 3s
+    setTimeout(() => {
+      toast.classList.remove("show");
+      setTimeout(() => {
+        toast.remove();
+      }, 300);
+    }, 3000);
+  }
+
+  // Toggle Like Item (Wishlist)
+  function toggleLike(id, btnElement) {
+    if (likedItems.includes(id)) {
+      likedItems = likedItems.filter(i => i !== id);
+      btnElement.classList.remove("liked");
+      const icon = btnElement.querySelector("i");
+      icon.className = "fa-regular fa-heart";
+      showToast("تمت الإزالة من المفضلة 🌸");
+    } else {
+      likedItems.push(id);
+      btnElement.classList.add("liked");
+      const icon = btnElement.querySelector("i");
+      icon.className = "fa-solid fa-heart";
+      showToast("تمت الإضافة لقائمة مفضلتكِ ❤️");
+    }
+    localStorage.setItem("liked_items", JSON.stringify(likedItems));
+  }
+
+  function loadWishlistState() {
+    const stored = localStorage.getItem("liked_items");
+    if (stored) {
+      likedItems = JSON.parse(stored);
+      renderProductsList('all'); // Refresh like UI
+    }
+  }
+
+  // Core Cart Operations
+  function toggleCart() {
+    document.getElementById("cart-sidebar").classList.toggle("open");
+    document.getElementById("cart-overlay").classList.toggle("show");
+  }
+
+  function addById(id) {
+    addToCart(id);
+  }
+
+  function addToCart(id) {
+    const product = allProducts.find(p => p.id === id);
+    if (!product) return;
+
+    const existing = shoppingCart.find(item => item.id === id);
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      shoppingCart.push({ ...product, quantity: 1 });
+    }
+
+    saveCartState();
+    updateCartUI();
+    showToast(`تمت إضافة ${product.name} إلى حقيبة التسوق الخاصة بكِ 🛍️`);
+  }
+
+  function updateQty(id, change) {
+    const item = shoppingCart.find(p => p.id === id);
+    if (!item) return;
+
+    item.quantity += change;
+    if (item.quantity <= 0) {
+      shoppingCart = shoppingCart.filter(p => p.id !== id);
+    }
+    saveCartState();
+    updateCartUI();
+  }
+
+  function removeItem(id) {
+    shoppingCart = shoppingCart.filter(p => p.id !== id);
+    saveCartState();
+    updateCartUI();
+    showToast("تم حذف المنتج من الحقيبة 🛍️");
+  }
+
+  function updateCartUI() {
+    const cartCount = document.getElementById("cartCount");
+    const cartItemsList = document.getElementById("cartItemsList");
+    const cartTotalPrice = document.getElementById("cartTotalPrice");
+    const remainingAmount = document.getElementById("remainingAmount");
+    const shippingProgressBar = document.getElementById("shippingProgressBar");
+    const shippingGoalMsg = document.getElementById("shippingGoalMsg");
+
+    // count elements
+    const totalCount = shoppingCart.reduce((acc, curr) => acc + curr.quantity, 0);
+    cartCount.textContent = totalCount;
+
+    // render elements
+    cartItemsList.innerHTML = "";
+    if (shoppingCart.length === 0) {
+      cartItemsList.innerHTML = `
+        <div class="empty-cart-state">
+          <i class="fa-solid fa-basket-shopping"></i>
+          <p style="font-size:15px; font-weight:700;">حقيبة التسوق فارغة حالياً</p>
+          <p style="font-size:12px; margin-top:5px;">املئيها بمنتجات تجعلكِ أكثر تميزاً وجمالاً</p>
+        </div>
+      `;
+      cartTotalPrice.textContent = "0 جنيه";
+      shippingProgressBar.style.width = "0%";
+      remainingAmount.textContent = "1000 جنيه";
+      return;
+    }
+
+    let totalSum = 0;
+    shoppingCart.forEach(item => {
+      totalSum += item.price * item.quantity;
+      const cartItemHTML = `
+        <div class="cart-item">
+          <img class="cart-item-img" src="${item.img}" alt="" onerror="handleImageError(this, '${item.category}')">
+          <div class="cart-item-info">
+            <h4 class="cart-item-title">${item.name}</h4>
+            <div class="cart-item-price">${(item.price * item.quantity).toLocaleString('ar-EG')} جنيه</div>
+            <div class="cart-qty-control">
+              <button class="qty-btn" onclick="updateQty(${item.id}, -1)">-</button>
+              <span style="font-weight:700; font-size:14px; min-width:18px; text-align:center;">${item.quantity}</span>
+              <button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button>
+            </div>
+          </div>
+          <button class="cart-item-remove" onclick="removeItem(${item.id})" title="حذف"><i class="fa-solid fa-trash-can"></i></button>
+        </div>
+      `;
+      cartItemsList.innerHTML += cartItemHTML;
+    });
+
+    cartTotalPrice.textContent = `${totalSum.toLocaleString('ar-EG')} جنيه`;
+
+    // Shipping goal calculation
+    const shippingGoal = 1000;
+    if (totalSum >= shippingGoal) {
+      shippingGoalMsg.innerHTML = `🎉 مبروك! لقد حصلتِ على <strong>شحن مجاني وهدية حصرية</strong> على هذا الطلب!`;
+      shippingProgressBar.style.width = "100%";
+    } else {
+      const remaining = shippingGoal - totalSum;
+      remainingAmount.textContent = `${remaining} جنيه`;
+      const percentage = (totalSum / shippingGoal) * 100;
+      shippingProgressBar.style.width = `${percentage}%`;
+      shippingGoalMsg.innerHTML = `تحتاجين إلى <span style="font-weight:700; color:var(--rose);" id="remainingAmount">${remaining} جنيه</span> إضافية للحصول على شحن مجاني وهدية!
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="shippingProgressBar" style="width: ${percentage}%"></div>
+        </div>`;
+    }
+  }
+
+  function saveCartState() {
+    localStorage.setItem("ayosha_cart", JSON.stringify(shoppingCart));
+  }
+
+  function loadCartState() {
+    const stored = localStorage.getItem("ayosha_cart");
+    if (stored) {
+      shoppingCart = JSON.parse(stored);
+      updateCartUI();
+    }
+  }
+
+  // Checkout via WhatsApp with fully structured list & pricing
+  function sendCartOrder() {
+    if (shoppingCart.length === 0) {
+      showToast("برجاء إضافة منتجات لحقيبتكِ أولاً للطلب 🌸");
+      return;
+    }
+
+    let message = "مرحباً Ayosha Store ✨🌸\n\nأود القيام بطلب شراء للمنتجات التالية:\n";
+    let totalSum = 0;
+    
+    shoppingCart.forEach((item, index) => {
+      const itemCost = item.price * item.quantity;
+      totalSum += itemCost;
+      message += `📍 ${index + 1}) *${item.name}*\n   القسم: ${item.category === 'clothes' ? 'ملابس' : item.category === 'bags' ? 'حقيبة' : 'عطر'}\n   الكمية: ${item.quantity} \n   السعر: ${itemCost.toLocaleString('ar-EG')} جنيه\n\n`;
+    });
+
+    message += `-----------------------------\n`;
+    message += `💰 *المجموع الكلي للحساب*: *${totalSum.toLocaleString('ar-EG')} جنيه مصري*\n`;
+    
+    if (totalSum >= 1000) {
+      message += `🎁 *العرض المطبق*: شحن مجاني للمحافظة + هدية مجانية داخل الطرد!\n`;
+    } else {
+      message += `🚚 *الشحن*: يضاف لاحقاً حسب المحافظة\n`;
+    }
+
+    message += `💵 *طريقة الدفع الفضلة*: كاش عند الاستلام ومعاينة الطلب\n\n`;
+    message += `يرجى التواصل معي لتأكيد الإسم، العنوان، ورقم الهاتف لإتمام الشحن السريع 🌸✨`;
+
+    const encoded = encodeURIComponent(message);
+    const waUrl = `https://wa.me/201006732527?text=${encoded}`;
+    window.open(waUrl, '_blank');
+  }
+
+  // Newsletter subscription simulation
+  function subscribeNewsletter() {
+    const emailInput = document.getElementById("newsletter-email");
+    const email = emailInput.value.trim();
+    if (!email) {
+      showToast("برجاء إدخال بريدك الإلكتروني 🌸");
+      return;
+    }
+    showToast("تهانينا! لقد تم تسجيلك وسيصلك كود الخصم 10% قريباً 💌");
+    emailInput.value = "";
+  }
+
+  // CUSTOMER SERVICE CHATBOT SYSTEM
+  const chatResponses = {
+    'أسعار المنتجات': 'تبدأ أسعار الملابس البراند المميزة من 850 جنيه، والشنط الأنيقة من 1350 جنيه، والعطور الباريسية الأصلية تبدأ من 1850 جنيه مصري 🌸✨ وكل المنتجات جودة بريميوم فاخرة.',
+    'كيف أطلب؟': 'يمكنك طلب المنتجات بسهولة عن طريق الضغط على زر "اطلبي" الموجود بجوار كل منتج لإضافته للسلة، وعند الانتهاء افتحي سلة المشتريات واضغطي على "إتمام الطلب واتساب" لإرساله لنا فوراً 🛍️',
+    'توصيل لأي محافظة؟': 'نعم يا جميلة! بنوصل لجميع محافظات مصر (القاهرة، الجيزة، الإسكندرية، محافظات الدلتا والصعيد). الشحن سريع جداً في خلال 24 إلى 48 ساعة فقط 🚚 والدفع عند الاستلام والمعاينة.',
+    'هل المنتجات أصلية؟': 'نعم بكل تأكيد! نحن في Ayosha Store نضمن لكِ أصالة وجودة المنتجات 100%، يمكنك معاينة المنتج بالكامل مع المندوب قبل دفع أي مبالغ لضمان راحتك ورضاكِ التام ✅'
   };
 
-  const defaultReply = 'شكراً لسؤالك! للردود التفصيلية، راسلينا على واتساب على الرقم +201006732527 وهنرد عليكي فوراً 💬';
+  const defaultBotReply = 'أهلاً بكِ يا جميلة! أنا متواجدة لمساعدتكِ في كل وقت. يمكنكِ الضغط على أحد الأسئلة السريعة أو إرسال طلبكِ مباشرة عبر الواتساب على +201006732527 💬 وسنرد عليكِ فوراً!';
 
   function toggleChat() {
-    document.getElementById('chatWindow').classList.toggle('open');
+    document.getElementById("chatWindow").classList.toggle("open");
   }
 
   function sendOption(text) {
-    addMessage(text, 'user');
-    const reply = responses[text] || defaultReply;
-    setTimeout(() => addMessage(reply, 'bot'), 600);
+    appendChatMessage(text, 'user');
+    const reply = chatResponses[text] || defaultBotReply;
+    setTimeout(() => {
+      appendChatMessage(reply, 'bot');
+    }, 600);
   }
 
   function sendMessage() {
-    const input = document.getElementById('chatInput');
+    const input = document.getElementById("chatInput");
     const text = input.value.trim();
     if (!text) return;
-    addMessage(text, 'user');
-    input.value = '';
-    const lower = text.toLowerCase();
-    let reply = defaultReply;
-    if (lower.includes('سعر') || lower.includes('بكام') || lower.includes('كام'))
-      reply = responses['أسعار المنتجات'];
-    else if (lower.includes('طلب') || lower.includes('اشتري'))
-      reply = responses['كيف أطلب؟'];
-    else if (lower.includes('توصيل') || lower.includes('شحن'))
-      reply = responses['توصيل لأي محافظة؟'];
-    else if (lower.includes('أصل') || lower.includes('اصل') || lower.includes('اصلي'))
-      reply = responses['هل المنتجات أصلية؟'];
-    setTimeout(() => addMessage(reply, 'bot'), 700);
+
+    appendChatMessage(text, 'user');
+    input.value = "";
+
+    // NLP - Pattern Matching for Egyptian Arabic
+    const query = text.toLowerCase();
+    let reply = defaultBotReply;
+
+    if (query.includes('سعر') || query.includes('بكام') || query.includes('كام') || query.includes('اسعار') || query.includes('أسعار')) {
+      reply = chatResponses['أسعار المنتجات'];
+    } else if (query.includes('طلب') || query.includes('طريقة') || query.includes('اشتري') || query.includes('ازاي')) {
+      reply = chatResponses['كيف أطلب؟'];
+    } else if (query.includes('شحن') || query.includes('توصيل') || query.includes('محافظة') || query.includes('بلد') || query.includes('مصاريف')) {
+      reply = chatResponses['توصيل لأي محافظة؟'];
+    } else if (query.includes('أصل') || query.includes('اصل') || query.includes('اصلي') || query.includes('كوبي') || query.includes('هاى كوبى')) {
+      reply = chatResponses['هل المنتجات أصلية؟'];
+    }
+
+    setTimeout(() => {
+      appendChatMessage(reply, 'bot');
+    }, 700);
   }
 
-  function addMessage(text, type) {
-    const msgs = document.getElementById('chatMessages');
-    const div = document.createElement('div');
-    div.className = `msg msg-${type}`;
-    div.textContent = text;
-    msgs.appendChild(div);
-    msgs.scrollTop = msgs.scrollHeight;
+  function appendChatMessage(text, sender) {
+    const container = document.getElementById("chatMessages");
+    const msgDiv = document.createElement("div");
+    msgDiv.className = `msg msg-${sender}`;
+    msgDiv.innerHTML = text;
+    container.appendChild(msgDiv);
+    container.scrollTop = container.scrollHeight;
   }
-
-  // Wishlist toggle
-  document.querySelectorAll('.product-wish').forEach(btn => {
-    btn.addEventListener('click', () => {
-      btn.textContent = btn.textContent === '🤍' ? '❤️' : '🤍';
-    });
-  });
 </script>
 </body>
 </html>
+
+```
