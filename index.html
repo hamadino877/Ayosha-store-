@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayosha Store | عالم الأناقة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a96e;
+    --gold-light: #e8d5b0;
+    --rose: #d4637a;
+    --blush: #f5e6ea;
+    --dark: #1a1218;
+    --charcoal: #2d2230;
+    --cream: #fdf8f5;
+    --text: #3a2d35;
+    --muted: #8a7580;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(201,169,110,0.3);
+  }
+
+  .header-top {
+    background: var(--gold);
+    text-align: center;
+    padding: 6px;
+    font-size: 13px;
+    color: var(--dark);
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 40px;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--gold);
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(201,169,110,0.4);
+  }
+
+  .logo span {
+    color: #fff;
+    font-weight: 400;
+    font-size: 12px;
+    display: block;
+    letter-spacing: 6px;
+    text-align: center;
+    margin-top: -4px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+    letter-spacing: 1px;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--gold);
+    color: var(--dark) !important;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-weight: 700 !important;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--charcoal) 50%, #3d2435 100%);
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(201,169,110,0.12) 0%, transparent 60%);
+  }
+
+  .hero-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a96e' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 60px 40px;
+    max-width: 1300px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .hero-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+
+  .hero-text h1 em {
+    color: var(--gold);
+    font-style: normal;
+    display: block;
+  }
+
+  .hero-text p {
+    color: #b0a0a8;
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: 36px;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--dark);
+    padding: 14px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(201,169,110,0.3);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: #fff;
+    padding: 14px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .hero-visual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 12px;
+    height: 460px;
+  }
+
+  .hero-img {
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,169,110,0.2);
+  }
+
+  .hero-img:first-child {
+    grid-row: span 2;
+    grid-column: 1;
+  }
+
+  .hero-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hero-badge {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: var(--gold);
+    color: var(--dark);
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  /* STATS */
+  .stats {
+    background: var(--dark);
+    padding: 30px 40px;
+    border-bottom: 1px solid rgba(201,169,110,0.2);
+  }
+
+  .stats-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .stat-item {
+    text-align: center;
+    color: #fff;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: var(--gold);
+    font-weight: 700;
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: #888;
+    margin-top: 4px;
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(201,169,110,0.3);
+  }
+
+  /* CATEGORIES */
+  .section {
+    padding: 80px 40px;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .section-tag {
+    display: inline-block;
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 4vw, 40px);
+    color: var(--dark);
+    line-height: 1.2;
+  }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .cat-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    cursor: pointer;
+    group: true;
+  }
+
+  .cat-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    display: block;
+  }
+
+  .cat-card:hover .cat-bg { transform: scale(1.05); }
+
+  .cat-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(26,18,24,0.85) 0%, transparent 50%);
+  }
+
+  .cat-info {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding: 28px 24px;
+    color: #fff;
+  }
+
+  .cat-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+
+  .cat-info p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 14px;
+  }
+
+  .cat-btn {
+    background: var(--gold);
+    color: var(--dark);
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .cat-btn:hover { background: var(--gold-light); }
+
+  /* PRODUCTS */
+  .products-bg {
+    background: linear-gradient(180deg, var(--cream) 0%, #f8f0f3 100%);
+    padding: 80px 0;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .product-card {
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: 1px solid rgba(0,0,0,0.06);
+    position: relative;
+  }
+
+  .product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 60px rgba(26,18,24,0.12);
+  }
+
+  .product-img-wrap {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: var(--blush);
+  }
+
+  .product-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+    display: block;
+  }
+
+  .product-card:hover .product-img-wrap img { transform: scale(1.08); }
+
+  .product-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--rose);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .product-badge.new { background: var(--gold); color: var(--dark); }
+  .product-badge.sale { background: #e05252; }
+
+  .product-wish {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 32px;
+    height: 32px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .product-wish:hover { background: var(--rose); }
+
+  .product-info {
+    padding: 16px;
+  }
+
+  .product-cat {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    color: var(--dark);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+
+  .product-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .product-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .product-price {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--rose);
+  }
+
+  .product-price-old {
+    font-size: 13px;
+    color: #bbb;
+    text-decoration: line-through;
+    margin-right: 6px;
+  }
+
+  .product-currency {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  .btn-cart {
+    background: var(--dark);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s;
+    white-space: nowrap;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .btn-cart:hover {
+    background: var(--gold);
+    color: var(--dark);
+  }
+
+  /* PERFUME SECTION */
+  .perfume-banner {
+    background: var(--dark);
+    padding: 80px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .perfume-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(212,99,122,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(201,169,110,0.1) 0%, transparent 60%);
+  }
+
+  .perfume-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .perfume-text .section-title { color: #fff; }
+  .perfume-text .section-tag { color: var(--rose); }
+
+  .perfume-text p {
+    color: #b0a0a8;
+    font-size: 16px;
+    line-height: 1.8;
+    margin: 20px 0 32px;
+  }
+
+  .perfume-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .perfume-item {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(201,169,110,0.2);
+    border-radius: 16px;
+    padding: 20px 16px;
+    text-align: center;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .perfume-item:hover {
+    background: rgba(201,169,110,0.12);
+    border-color: var(--gold);
+    transform: translateY(-4px);
+  }
+
+  .perfume-img {
+    width: 80px;
+    height: 100px;
+    object-fit: contain;
+    margin: 0 auto 12px;
+    display: block;
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.3));
+  }
+
+  .perfume-name {
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .perfume-brand {
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .perfume-price {
+    color: var(--rose);
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  /* WHATSAPP CTA */
+  .whatsapp-section {
+    background: linear-gradient(135deg, #1a1218 0%, #2d1a24 100%);
+    padding: 70px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .whatsapp-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(201,169,110,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .whatsapp-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: #fff;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .whatsapp-section p {
+    color: #b0a0a8;
+    font-size: 16px;
+    margin-bottom: 36px;
+    position: relative;
+  }
+
+  .whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #25D366;
+    color: #fff;
+    padding: 16px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 700;
+    transition: all 0.3s;
+    position: relative;
+    box-shadow: 0 8px 30px rgba(37,211,102,0.3);
+  }
+
+  .whatsapp-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(37,211,102,0.4);
+    background: #20c45e;
+  }
+
+  .phone-display {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(201,169,110,0.3);
+    padding: 12px 24px;
+    border-radius: 50px;
+    color: var(--gold);
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 20px;
+    letter-spacing: 1px;
+    direction: ltr;
+  }
+
+  /* SOCIAL */
+  .social-section {
+    padding: 60px 40px;
+    text-align: center;
+    background: var(--cream);
+  }
+
+  .social-section .section-header { margin-bottom: 36px; }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+  }
+
+  .social-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+  }
+
+  .social-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+
+  .social-instagram {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    color: #fff;
+  }
+
+  .social-facebook {
+    background: #1877F2;
+    color: #fff;
+  }
+
+  .social-tiktok {
+    background: #000;
+    color: #fff;
+    border-color: #69C9D0;
+  }
+
+  .social-icon { font-size: 20px; }
+
+  /* CHATBOT */
+  .chat-bubble {
+    position: fixed;
+    bottom: 28px;
+    left: 28px;
+    z-index: 999;
+  }
+
+  .chat-toggle {
+    width: 60px;
+    height: 60px;
+    background: var(--rose);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 8px 25px rgba(212,99,122,0.4);
+    transition: all 0.3s;
+    animation: chatPulse 2s infinite;
+  }
+
+  @keyframes chatPulse {
+    0%, 100% { box-shadow: 0 8px 25px rgba(212,99,122,0.4); }
+    50% { box-shadow: 0 8px 35px rgba(212,99,122,0.7); }
+  }
+
+  .chat-toggle:hover { transform: scale(1.1); }
+
+  .chat-window {
+    position: absolute;
+    bottom: 75px;
+    left: 0;
+    width: 320px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+    overflow: hidden;
+    display: none;
+    flex-direction: column;
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .chat-window.open { display: flex; }
+
+  .chat-head {
+    background: var(--dark);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .chat-avatar {
+    width: 38px;
+    height: 38px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  .chat-head-text h4 { color: #fff; font-size: 15px; }
+  .chat-head-text p { color: #25D366; font-size: 12px; }
+
+  .chat-messages {
+    padding: 16px;
+    height: 220px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #f8f3f5;
+  }
+
+  .msg {
+    padding: 10px 14px;
+    border-radius: 16px;
+    font-size: 13px;
+    line-height: 1.5;
+    max-width: 85%;
+  }
+
+  .msg-bot {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.08);
+    align-self: flex-start;
+    border-radius: 4px 16px 16px 16px;
+    color: var(--text);
+  }
+
+  .msg-user {
+    background: var(--rose);
+    color: #fff;
+    align-self: flex-end;
+    border-radius: 16px 16px 4px 16px;
+  }
+
+  .chat-options {
+    padding: 10px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    background: #f8f3f5;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .chat-opt {
+    background: #fff;
+    border: 1px solid rgba(201,169,110,0.5);
+    color: var(--dark);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    transition: all 0.2s;
+  }
+
+  .chat-opt:hover { background: var(--gold); color: var(--dark); border-color: var(--gold); }
+
+  .chat-footer {
+    padding: 12px 16px;
+    display: flex;
+    gap: 8px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .chat-footer input {
+    flex: 1;
+    border: 1px solid rgba(0,0,0,0.12);
+    border-radius: 20px;
+    padding: 8px 14px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+    outline: none;
+    background: #fff;
+  }
+
+  .chat-footer input:focus { border-color: var(--rose); }
+
+  .chat-send {
+    background: var(--rose);
+    border: none;
+    color: #fff;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+  }
+
+  .chat-send:hover { background: var(--dark); }
+
+  /* FLOATING WHATSAPP */
+  .float-wa {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 999;
+  }
+
+  .float-wa a {
+    width: 60px;
+    height: 60px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 28px;
+    box-shadow: 0 8px 25px rgba(37,211,102,0.4);
+    transition: all 0.3s;
+    animation: waPulse 2s infinite;
+  }
+
+  @keyframes waPulse {
+    0%, 100% { box-shadow: 0 8px 25px rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 8px 40px rgba(37,211,102,0.7); }
+  }
+
+  .float-wa a:hover { transform: scale(1.1); }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    padding: 60px 40px 30px;
+    color: #888;
+    border-top: 1px solid rgba(201,169,110,0.2);
+  }
+
+  .footer-grid {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .footer-brand .logo { font-size: 24px; margin-bottom: 14px; display: block; }
+  .footer-brand p { font-size: 14px; line-height: 1.7; max-width: 260px; }
+
+  .footer-col h4 {
+    color: #fff;
+    font-size: 15px;
+    margin-bottom: 18px;
+    font-weight: 600;
+  }
+
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul li a { color: #888; text-decoration: none; font-size: 14px; transition: color 0.3s; }
+  .footer-col ul li a:hover { color: var(--gold); }
+
+  .footer-bottom {
+    max-width: 1300px;
+    margin: 24px auto 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+  }
+
+  .footer-bottom span { color: var(--gold); }
+
+  /* BANNER */
+  .offer-banner {
+    background: linear-gradient(135deg, var(--rose), #c94e68);
+    padding: 50px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .offer-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='1'/%3E%3C/svg%3E");
+  }
+
+  .offer-banner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: #fff;
+    margin-bottom: 12px;
+    position: relative;
+  }
+
+  .offer-banner p {
+    color: rgba(255,255,255,0.85);
+    font-size: 16px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+
+  .offer-banner .btn-primary {
+    background: #fff;
+    color: var(--rose);
+    position: relative;
+  }
+
+  .offer-banner .btn-primary:hover { background: var(--gold-light); }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .hero-content { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .categories-grid { grid-template-columns: 1fr 1fr; }
+    .products-grid { grid-template-columns: 1fr 1fr; }
+    .perfume-inner { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .stats-inner { flex-wrap: wrap; gap: 20px; }
+    .stat-divider { display: none; }
+    .section { padding: 50px 20px; }
+  }
+
+  @media (max-width: 500px) {
+    .categories-grid { grid-template-columns: 1fr; }
+    .products-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .chat-window { width: 280px; }
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-text { animation: fadeInUp 0.8s ease both; }
+  .hero-text h1 { animation: fadeInUp 0.8s 0.1s ease both; }
+  .hero-text p { animation: fadeInUp 0.8s 0.2s ease both; }
+  .hero-btns { animation: fadeInUp 0.8s 0.3s ease both; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-top">
+    🌸 شحن لجميع محافظات مصر &nbsp;|&nbsp; 🎁 هدية مجانية مع كل طلب فوق 500 جنيه &nbsp;|&nbsp; ✨ أصالة وأناقة في كل قطعة
+  </div>
+  <nav>
+    <div class="logo">
+      Ayosha
+      <span>S T O R E</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#categories">الأقسام</a></li>
+      <li><a href="#products">المنتجات</a></li>
+      <li><a href="#perfumes">العطور</a></li>
+      <li><a href="#offers">العروض</a></li>
+      <li><a href="#contact" class="nav-cta">تواصلي معنا</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <p class="section-tag">✦ الكوليكشن الجديد 2025</p>
+      <h1>
+        أناقتك
+        <em>أولويتنا</em>
+      </h1>
+      <p>
+        اكتشفي عالم Ayosha Store — وجهتك الأولى للبراندات العالمية من عطور فاخرة، شنط أصيلة، وملابس راقية بأسعار تناسبك.
+      </p>
+      <div class="hero-btns">
+        <a href="#products" class="btn-primary">🛍️ تسوقي الآن</a>
+        <a href="https://wa.me/201006732527" target="_blank" class="btn-secondary">💬 واتساب</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=600&fit=crop" alt="fashion">
+        <span class="hero-badge">براند أصلي ✓</span>
+      </div>
+      <div class="hero-img">
+        <img src="https://images.unsplash.com/photo-1590736704728-f4730bb30770?w=300&h=200&fit=crop" alt="perfume">
+        <span class="hero-badge">عطور فاخرة</span>
+      </div>
+      <div class="hero-img">
+        <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=300&h=200&fit=crop" alt="bags">
+        <span class="hero-badge">شنط براند</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-num">+5000</span>
+      <p class="stat-label">عميلة سعيدة</p>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">+200</span>
+      <p class="stat-label">منتج أصيل</p>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">3 أيام</span>
+      <p class="stat-label">توصيل لجميع محافظات مصر</p>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">100%</span>
+      <p class="stat-label">ضمان الأصالة</p>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="section" id="categories">
+  <div class="section-header">
+    <p class="section-tag">تصفحي بحرية</p>
+    <h2 class="section-title">أقسام Ayosha Store</h2>
+  </div>
+  <div class="categories-grid">
+    <div class="cat-card">
+      <img class="cat-bg" src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=500&h=700&fit=crop" alt="ملابس">
+      <div class="cat-overlay"></div>
+      <div class="cat-info">
+        <h3>الملابس البراند</h3>
+        <p>أحدث كوليكشنات الموضة العالمية</p>
+        <a href="#products" class="cat-btn">تسوقي الآن</a>
+      </div>
+    </div>
+    <div class="cat-card">
+      <img class="cat-bg" src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500&h=700&fit=crop" alt="شنط">
+      <div class="cat-overlay"></div>
+      <div class="cat-info">
+        <h3>الشنط الفاخرة</h3>
+        <p>شانيل، لويس فيتون، جوتشي والمزيد</p>
+        <a href="#products" class="cat-btn">اكتشفي</a>
+      </div>
+    </div>
+    <div class="cat-card">
+      <img class="cat-bg" src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500&h=700&fit=crop" alt="عطور">
+      <div class="cat-overlay"></div>
+      <div class="cat-info">
+        <h3>العطور الفاخرة</h3>
+        <p>عطور أصيلة لكل مناسبة</p>
+        <a href="#perfumes" class="cat-btn">شمي العطر</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<div class="products-bg" id="products">
+  <div class="section" style="padding-top:0;padding-bottom:0">
+    <div class="section-header">
+      <p class="section-tag">الأكثر مبيعاً</p>
+      <h2 class="section-title">منتجاتنا المميزة</h2>
+    </div>
+    <div class="products-grid">
+
+      <!-- Product 1 -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&h=400&fit=crop" alt="شنطة">
+          <span class="product-badge new">جديد</span>
+          <div class="product-wish">🤍</div>
+        </div>
+        <div class="product-info">
+          <span class="product-cat">شنط</span>
+          <h3 class="product-name">Classic Tote Bag</h3>
+          <p class="product-sub">جلد طبيعي - بيج / أسود</p>
+          <div class="product-price-row">
+            <div>
+              <span class="product-price-old">2,800 ج</span>
+              <span class="product-price">1,950</span>
+              <span class="product-currency">جنيه</span>
+            </div>
+            <a href="https://wa.me/201006732527?text=أريد الاستفسار عن شنطة Classic Tote" class="btn-cart" target="_blank">🛒 اطلبي</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=400&h=400&fit=crop" alt="فستان">
+          <span class="product-badge">bestseller</span>
+          <div class="product-wish">🤍</div>
+        </div>
+        <div class="product-info">
+          <span class="product-cat">ملابس</span>
+          <h3 class="product-name">Midi Wrap Dress</h3>
+          <p class="product-sub">فستان ميدي أنيق - ألوان متعددة</p>
+          <div class="product-price-row">
+            <div>
+              <span class="product-price">1,200</span>
+              <span class="product-currency">جنيه</span>
+            </div>
+            <a href="https://wa.me/201006732527?text=أريد الاستفسار عن Midi Wrap Dress" class="btn-cart" target="_blank">🛒 اطلبي</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1600612253971-85b4e8cf1e5a?w=400&h=400&fit=crop" alt="حقيبة">
+          <span class="product-badge sale">-30%</span>
+          <div class="product-wish">🤍</div>
+        </div>
+        <div class="product-info">
+          <span class="product-cat">شنط</span>
+          <h3 class="product-name">Shoulder Chain Bag</h3>
+          <p class="product-sub">سلسلة ذهبية - جلد إيطالي</p>
+          <div class="product-price-row">
+            <div>
+              <span class="product-price-old">3,500 ج</span>
+              <span class="product-price">2,450</span>
+              <span class="product-currency">جنيه</span>
+            </div>
+            <a href="https://wa.me/201006732527?text=أريد الاستفسار عن Shoulder Chain Bag" class="btn-cart" target="_blank">🛒 اطلبي</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1591369822096-ffd140ec948f?w=400&h=400&fit=crop" alt="بلوزة">
+          <span class="product-badge new">جديد</span>
+          <div class="product-wish">🤍</div>
+        </div>
+        <div class="product-info">
+          <span class="product-cat">ملابس</span>
+          <h3 class="product-name">Silk Blouse Premium</h3>
+          <p class="product-sub">حرير طبيعي - أبيض / كريمي</p>
+          <div class="product-price-row">
+            <div>
+              <span class="product-price">850</span>
+              <span class="product-currency">جنيه</span>
+            </div>
+            <a href="https://wa.me/201006732527?text=أريد الاستفسار عن Silk Blouse" class="btn-cart" target="_blank">🛒 اطلبي</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 5 -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1594938298603-c8148c4b4993?w=400&h=400&fit=crop" alt="حذاء">
+          <span class="product-badge">bestseller</span>
+          <div class="product-wish">🤍</div>
+        </div>
+        <div class="product-info">
+          <span class="product-cat">إكسسوار</span>
+          <h3 class="product-name">Scarf Luxury Collection</h3>
+          <p class="product-sub">إيشارب كاشمير فاخر - ألوان موسمية</p>
+          <div class="product-price-row">
+            <div>
+              <span class="product-price">650</span>
+              <span class="product-currency">جنيه</span>
+            </div>
+            <a href="https://wa.me/201006732527?text=أريد الاستفسار عن Scarf Luxury" class="btn-cart" target="_blank">🛒 اطلبي</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 6 -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400&h=400&fit=crop" alt="بدلة">
+          <span class="product-badge sale">-20%</span>
+          <div class="product-wish">🤍</div>
+        </div>
+        <div class="product-info">
+          <span class="product-cat">ملابس</span>
+          <h3 class="product-name">Power Suit Set</h3>
+          <p class="product-sub">بدلة بناطيل - أوف وايت / أسود</p>
+          <div class="product-price-row">
+            <div>
+              <span class="product-price-old">2,200 ج</span>
+              <span class="product-price">1,760</span>
+              <span class="product-currency">جنيه</span>
+            </div>
+            <a href="https://wa.me/201006732527?text=أريد الاستفسار عن Power Suit" class="btn-cart" target="_blank">🛒 اطلبي</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 7 -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=400&h=400&fit=crop" alt="شنطة صغيرة">
+          <span class="product-badge new">حصري</span>
+          <div class="product-wish">🤍</div>
+        </div>
+        <div class="product-info">
+          <span class="product-cat">شنط</span>
+          <h3 class="product-name">Mini Crossbody Gold</h3>
+          <p class="product-sub">شنطة صغيرة بسلسلة ذهبية</p>
+          <div class="product-price-row">
+            <div>
+              <span class="product-price">1,350</span>
+              <span class="product-currency">جنيه</span>
+            </div>
+            <a href="https://wa.me/201006732527?text=أريد الاستفسار عن Mini Crossbody" class="btn-cart" target="_blank">🛒 اطلبي</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 8 -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=400&h=400&fit=crop" alt="فستان سهرة">
+          <span class="product-badge">رقي فاخر</span>
+          <div class="product-wish">🤍</div>
+        </div>
+        <div class="product-info">
+          <span class="product-cat">ملابس سهرة</span>
+          <h3 class="product-name">Evening Gown Luxe</h3>
+          <p class="product-sub">فستان سهرة مطرز - أحمر / ذهبي</p>
+          <div class="product-price-row">
+            <div>
+              <span class="product-price">3,200</span>
+              <span class="product-currency">جنيه</span>
+            </div>
+            <a href="https://wa.me/201006732527?text=أريد الاستفسار عن Evening Gown" class="btn-cart" target="_blank">🛒 اطلبي</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PERFUMES -->
+<div class="perfume-banner" id="perfumes">
+  <div class="perfume-inner">
+    <div class="perfume-text">
+      <p class="section-tag">✦ عطور حصرية</p>
+      <h2 class="section-title">كوليكشن العطور الفاخرة</h2>
+      <p>عطور أصيلة 100% من أشهر الماركات العالمية. اختاري عطرك المفضل وأضيفي لمسة أناقة لكل يوم.</p>
+      <a href="https://wa.me/201006732527?text=أريد الاستفسار عن العطور" class="btn-primary" target="_blank">💛 تواصلي لأوردر</a>
+    </div>
+    <div class="perfume-grid">
+      <div class="perfume-item">
+        <img class="perfume-img" src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=100&h=130&fit=crop" alt="عطر">
+        <p class="perfume-name">La Vie Est Belle</p>
+        <span class="perfume-brand">LANCÔME</span>
+        <p class="perfume-price">1,850 جنيه</p>
+      </div>
+      <div class="perfume-item">
+        <img class="perfume-img" src="https://images.unsplash.com/photo-1588514912908-3e4e3fe0f5e9?w=100&h=130&fit=crop" alt="عطر">
+        <p class="perfume-name">Miss Dior Blooming</p>
+        <span class="perfume-brand">DIOR</span>
+        <p class="perfume-price">2,400 جنيه</p>
+      </div>
+      <div class="perfume-item">
+        <img class="perfume-img" src="https://images.unsplash.com/photo-1595535873420-a599195b3f4a?w=100&h=130&fit=crop" alt="عطر">
+        <p class="perfume-name">Chance Eau Tendre</p>
+        <span class="perfume-brand">CHANEL</span>
+        <p class="perfume-price">2,900 جنيه</p>
+      </div>
+      <div class="perfume-item">
+        <img class="perfume-img" src="https://images.unsplash.com/photo-1547887538-047f814a2a45?w=100&h=130&fit=crop" alt="عطر">
+        <p class="perfume-name">Black Opium</p>
+        <span class="perfume-brand">YSL</span>
+        <p class="perfume-price">2,150 جنيه</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- OFFER BANNER -->
+<div class="offer-banner" id="offers">
+  <h2>🎀 عرض خاص — توصيل مجاني!</h2>
+  <p>عند الطلب بأكثر من 1000 جنيه تحصلي على توصيل مجاني لأي محافظة في مصر + هدية مجانية مفاجأة</p>
+  <a href="https://wa.me/201006732527?text=أريد الاستفادة من عرض التوصيل المجاني" class="btn-primary" target="_blank">🛍️ اطلبي الآن</a>
+</div>
+
+<!-- WHATSAPP CONTACT -->
+<div class="whatsapp-section" id="contact">
+  <div style="position:relative;z-index:2">
+    <p class="section-tag" style="color:var(--gold)">📞 تواصلي معنا</p>
+    <h2>هنكون معاكي في أي وقت!</h2>
+    <p>للاستفسار عن المنتجات، الأسعار، المقاسات أو الطلب المباشر — تواصلي على واتساب أو اتصلي بنا</p>
+    <a href="https://wa.me/201006732527" class="whatsapp-btn" target="_blank">
+      💬 راسلينا على واتساب
+    </a>
+    <br>
+    <div class="phone-display">
+      📞 +20 100 673 2527
+    </div>
+  </div>
+</div>
+
+<!-- SOCIAL MEDIA -->
+<div class="social-section">
+  <div class="section-header">
+    <p class="section-tag">تابعينا</p>
+    <h2 class="section-title">تواصلي معنا على السوشيال ميديا</h2>
+  </div>
+  <div class="social-links">
+    <a href="#" class="social-card social-instagram">
+      <span class="social-icon">📸</span> Instagram — @ayosha.store
+    </a>
+    <a href="#" class="social-card social-facebook">
+      <span class="social-icon">👤</span> Facebook — Ayosha Store
+    </a>
+    <a href="#" class="social-card social-tiktok">
+      <span class="social-icon">🎵</span> TikTok — @ayosha_store
+    </a>
+  </div>
+
+  <!-- Trust badges -->
+  <div style="display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin-top:20px">
+    <div style="text-align:center;padding:20px 30px;background:#fff;border-radius:16px;border:1px solid rgba(0,0,0,0.07);min-width:150px;box-shadow:0 4px 20px rgba(0,0,0,0.05)">
+      <div style="font-size:32px;margin-bottom:8px">🔒</div>
+      <p style="font-weight:700;font-size:14px;color:var(--dark)">دفع آمن</p>
+      <p style="font-size:12px;color:var(--muted)">كاش عند الاستلام</p>
+    </div>
+    <div style="text-align:center;padding:20px 30px;background:#fff;border-radius:16px;border:1px solid rgba(0,0,0,0.07);min-width:150px;box-shadow:0 4px 20px rgba(0,0,0,0.05)">
+      <div style="font-size:32px;margin-bottom:8px">🚚</div>
+      <p style="font-weight:700;font-size:14px;color:var(--dark)">توصيل سريع</p>
+      <p style="font-size:12px;color:var(--muted)">2-3 أيام عمل</p>
+    </div>
+    <div style="text-align:center;padding:20px 30px;background:#fff;border-radius:16px;border:1px solid rgba(0,0,0,0.07);min-width:150px;box-shadow:0 4px 20px rgba(0,0,0,0.05)">
+      <div style="font-size:32px;margin-bottom:8px">✅</div>
+      <p style="font-weight:700;font-size:14px;color:var(--dark)">منتجات أصلية</p>
+      <p style="font-size:12px;color:var(--muted)">ضمان 100%</p>
+    </div>
+    <div style="text-align:center;padding:20px 30px;background:#fff;border-radius:16px;border:1px solid rgba(0,0,0,0.07);min-width:150px;box-shadow:0 4px 20px rgba(0,0,0,0.05)">
+      <div style="font-size:32px;margin-bottom:8px">🔄</div>
+      <p style="font-weight:700;font-size:14px;color:var(--dark)">إرجاع واستبدال</p>
+      <p style="font-size:12px;color:var(--muted)">خلال 7 أيام</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">Ayosha <span>S T O R E</span></span>
+      <p>وجهتك الأولى للأناقة والبراندات العالمية في مصر. نقدم أفضل المنتجات بأسعار تنافسية وخدمة عملاء متميزة.</p>
+      <div style="margin-top:16px;color:var(--gold);direction:ltr;font-size:15px;font-weight:700">
+        📞 +20 100 673 2527
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>الأقسام</h4>
+      <ul>
+        <li><a href="#products">الملابس البراند</a></li>
+        <li><a href="#products">الشنط الفاخرة</a></li>
+        <li><a href="#perfumes">العطور</a></li>
+        <li><a href="#products">الإكسسوارات</a></li>
+        <li><a href="#offers">العروض الخاصة</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>خدمة العملاء</h4>
+      <ul>
+        <li><a href="https://wa.me/201006732527" target="_blank">واتساب مباشر</a></li>
+        <li><a href="#">سياسة الإرجاع</a></li>
+        <li><a href="#">الشحن والتوصيل</a></li>
+        <li><a href="#">الأسئلة الشائعة</a></li>
+        <li><a href="#">تتبع الطلب</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>تابعينا</h4>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">TikTok</a></li>
+      </ul>
+      <div style="margin-top:20px">
+        <p style="font-size:12px;margin-bottom:8px;color:#666">اشتركي في نشرتنا البريدية</p>
+        <div style="display:flex;gap:8px">
+          <input placeholder="إيميلك هنا" style="flex:1;padding:8px 12px;border:1px solid rgba(201,169,110,0.4);border-radius:20px;font-family:'Cairo',sans-serif;font-size:12px;background:rgba(255,255,255,0.05);color:#ccc;outline:none">
+          <button style="background:var(--gold);border:none;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:14px">→</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 <span>Ayosha Store</span> — جميع الحقوق محفوظة</p>
+    <p>صُنع بـ 🌸 لأجمل النساء</p>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<div class="float-wa">
+  <a href="https://wa.me/201006732527" target="_blank" title="واتساب">💬</a>
+</div>
+
+<!-- CHATBOT -->
+<div class="chat-bubble">
+  <button class="chat-toggle" onclick="toggleChat()" title="خدمة العملاء">💁‍♀️</button>
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-head">
+      <div class="chat-avatar">👸</div>
+      <div class="chat-head-text">
+        <h4>Ayosha Store</h4>
+        <p>● متاحة الآن</p>
+      </div>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="msg msg-bot">أهلاً بيكي في Ayosha Store! 🌸 أنا هنا أساعدك. إيه اللي تحتاجيه؟</div>
+    </div>
+    <div class="chat-options" id="chatOptions">
+      <button class="chat-opt" onclick="sendOption('أسعار المنتجات')">💰 الأسعار</button>
+      <button class="chat-opt" onclick="sendOption('كيف أطلب؟')">🛍️ طريقة الطلب</button>
+      <button class="chat-opt" onclick="sendOption('توصيل لأي محافظة؟')">🚚 التوصيل</button>
+      <button class="chat-opt" onclick="sendOption('هل المنتجات أصلية؟')">✅ الأصالة</button>
+    </div>
+    <div class="chat-footer">
+      <input type="text" id="chatInput" placeholder="اكتبي سؤالك..." onkeypress="if(event.key==='Enter') sendMessage()">
+      <button class="chat-send" onclick="sendMessage()">↑</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Chatbot
+  const responses = {
+    'أسعار المنتجات': 'أسعارنا تبدأ من 650 جنيه للإكسسوارات، 850 جنيه للملابس، 1350 جنيه للشنط، و1850 جنيه للعطور. كلها براندات أصلية 💛',
+    'كيف أطلب؟': 'بسيطة! اضغطي على "اطلبي" جنب أي منتج أو راسلينا على واتساب على +201006732527 وقوليلنا اسم المنتج والمقاس 🌸',
+    'توصيل لأي محافظة؟': 'بنوصل لجميع محافظات مصر خلال 2-3 أيام عمل. التوصيل مجاني عند الطلب بأكثر من 1000 جنيه! 🚚',
+    'هل المنتجات أصلية؟': 'أيوه 100%! كل منتجاتنا أصلية ومعاها ضمان. مش بنتاجر في منتجات مقلدة أبداً ✅',
+  };
+
+  const defaultReply = 'شكراً لسؤالك! للردود التفصيلية، راسلينا على واتساب على الرقم +201006732527 وهنرد عليكي فوراً 💬';
+
+  function toggleChat() {
+    document.getElementById('chatWindow').classList.toggle('open');
+  }
+
+  function sendOption(text) {
+    addMessage(text, 'user');
+    const reply = responses[text] || defaultReply;
+    setTimeout(() => addMessage(reply, 'bot'), 600);
+  }
+
+  function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const text = input.value.trim();
+    if (!text) return;
+    addMessage(text, 'user');
+    input.value = '';
+    const lower = text.toLowerCase();
+    let reply = defaultReply;
+    if (lower.includes('سعر') || lower.includes('بكام') || lower.includes('كام'))
+      reply = responses['أسعار المنتجات'];
+    else if (lower.includes('طلب') || lower.includes('اشتري'))
+      reply = responses['كيف أطلب؟'];
+    else if (lower.includes('توصيل') || lower.includes('شحن'))
+      reply = responses['توصيل لأي محافظة؟'];
+    else if (lower.includes('أصل') || lower.includes('اصل') || lower.includes('اصلي'))
+      reply = responses['هل المنتجات أصلية؟'];
+    setTimeout(() => addMessage(reply, 'bot'), 700);
+  }
+
+  function addMessage(text, type) {
+    const msgs = document.getElementById('chatMessages');
+    const div = document.createElement('div');
+    div.className = `msg msg-${type}`;
+    div.textContent = text;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  // Wishlist toggle
+  document.querySelectorAll('.product-wish').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.textContent = btn.textContent === '🤍' ? '❤️' : '🤍';
+    });
+  });
+</script>
+</body>
+</html>
